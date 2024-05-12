@@ -2,14 +2,13 @@
 
 Linux Professional Institute Certification Level 1:
 
-- System Architecture (101)
-
-* Determine and configure hardware settings 101.1
-* The Boot Process 101.2
-
-- Linux installation and Package Management (102)
-- GNU and Unic Commands (103)
-- Devices, Linux Filesystems, Filesystem Hierarchy standard (104)
+*  System Architecture (101)
+ -  Determine and configure hardware settings 101.1
+ - The Boot Process 101.2
+ 
+* Linux installation and Package Management (102)
+* GNU and Unic Commands (103)
+* Devices, Linux Filesystems, Filesystem Hierarchy standard (104)
 
 ## System Architecture (101)
 
@@ -109,7 +108,8 @@ sudo modprobe iwlwifi
 sudo rmmod  -f <nameofmodule>
 ```
 
-- NOTE: the changes will be temporary, but for keeping them permanently add their names into `/etc/modules` and also add their config files into the `/etc/modprobe.d/`
+* NOTE: the changes will be temporary, but for keeping them permanently add their names into `/etc/modules` and also add their config files into the `/etc/modprobe.d/`
+
 
 ### The Boot Process 101.2
 
