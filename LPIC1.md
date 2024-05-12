@@ -56,7 +56,7 @@ Here is where the kernel keeps its settings and properties. This directory inclu
 
 - `../net`: information about network e.g. all informations and status about ipv4 is in `net/ipv4` and by issueing `$ cat ip_forward` show the number of forwarding ip.
 
-#### hardware related commands:
+#### **hardware related commands:**
 
 **lsusb:** Shows `USB` devices that are conencted to the system sush as:
 
