@@ -56,7 +56,9 @@ Here is where the kernel keeps its settings and properties. This directory inclu
 
 - `../net`: information about network e.g. all informations and status about ipv4 is in `net/ipv4` and by issueing `$ cat ip_forward` show the number of forwarding ip.
 
-#### **hardware related commands:**
+---
+
+#### hardware related commands:
 
 **lsusb:** Shows `USB` devices that are conencted to the system sush as:
 
@@ -70,6 +72,8 @@ Here is where the kernel keeps its settings and properties. This directory inclu
 **lsblk:** Shows all `block-devices` which are those that can read from or write to by blocks of data,
 
 **lshw:** shows information about hardware.
+
+---
 
 #### Loadable Kernel Modules:
 
@@ -89,7 +93,7 @@ These modules are modules are small pieces of code that can be dynamically loade
 
 -`modprobe <name of the module>`: similar to `insmod` is used to insert/add a module into kernel. but `modprobe` is more easy to use, the user only need to type the name of module, but using `insmod` the user should give the path of the module.
 
-part 6 3/3 07:05
+---
 
 #file
 ##stream editor, filterning and transformating:
