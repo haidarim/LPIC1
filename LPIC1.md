@@ -128,6 +128,91 @@ sudo rmmod  -f <nameofmodule>
 
 
 ### The Boot Process 101.2
+When  power being streamed into motherbord then the firmware will starts and check hardwares. After firmware performed sanity check of all hardware (PowerOnSelfTest), it will start the bootloader program. 
+
+Boot loader program (e.g. grub) is located in hard-disk, thi program in its turn will boot the kernel based on its configuration. The advantage of use a bootloader program intead of loading the kernel directly by firmaware is that, if there is any issue with the kernel we still can give some commands in boot loader such as checking the kernel, changing the kernel, use older version of the kernel, etc. 
+
+Kernel loads and prepare the system/ root file system, the kernel itself needs some derivers and therefore uses initramfs/initrd file for this porpuse. The kernel will run the `Init` system which starts programs, services GUI, ... 
+There are two different init systems: 
+- SystemVinit(system five init): older version
+- systemd: newer version
+
+information about fimware is located in `/sys/firmware`
+
+In Linux almost every thing being logged, even when kernel is loading. In fact during boot the kernle does not log to any file beacause at this time it does not have access for writing to some file, instead the kernel will log to `ring buffer`, which is used to log during the boot by kernel. All logs can be find in `/var/log/`, to check information in ring buffer print the `/var/log/dmesg`. boot logs are in `var/log/boot.log`, etc. 
+
+
+
+**Commands relatedd to log:**
+- `dmesg`: will print all info in ring buffer. 
+- `journalctl`: prints journals/logs, e.g. `journal -k` to print kernel logs. 
+
+**More about init systems:**
+1. `systemd`: is a daemon (system daemon), a daemon in Linux is a background process, performing tasks normally without user-interaction. systemd are based on units, an unit is an configuration file describing how systemd manages differetn system resources. These units can be of different types depended on which resource they describe. There are 12 types of units including: 
+- Service units  
+- Socket units
+- Device units
+- Mount units
+- Timer units
+- Target units
+- Swap units
+- Snapshot units
+- Slice units
+- Scope units
+- Path units
+- Automount units
+
+These units are typically located in 
+1. `/etc/systemd/system/`
+2. `/run/systemd/system/`
+3. `usr/lib/systemd/system`
+
+
+**Commands related to systemd:**
+- `systemctl`: is used to query or send control command to the system manager, e.g. starting a service, ...
+ex0: to list all units use `systemctl list-units`
+ex1: to list only unit of a special type use `systemctl list-units --type=<serviceName`
+
+ex2: To get the status of services by `systemctl status <e.g. service name>`
+and much much more ... 
+
+ex3: to get information about a unit: `systemctl cat <name of that unit e.g. grafical.target>`
+
+
+008 101.2 2/2  23:00
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #file
 ##stream editor, filterning and transformating:
