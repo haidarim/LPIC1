@@ -3,8 +3,8 @@
 Linux Professional Institute Certification Level 1:
 
 * System Architecture (101)
--  Determine and configure hardware settings 101.1
-- The Boot Process 101.2
+. Determine and configure hardware settings 101.1
+. The Boot Process 101.2
 
 * Linux installation and Package Management (102)
 * GNU and Unic Commands (103)
