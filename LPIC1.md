@@ -2,17 +2,31 @@
 
 Linux Professional Institute Certification Level 1:
 
-
-<ul>
 <h4> System Architecture (101)</h4>
+<ul>
     <li>Determine and configure hardware settings 101.1</li>
     <li>The Boot Process 101.2</li>
 </ul>
 
+<h4> Linux installation and Package Management (102)</h4>
+<ul>
+    <li></li>
+    <li></li>
+</ul>
 
-* Linux installation and Package Management (102)
-* GNU and Unic Commands (103)
-* Devices, Linux Filesystems, Filesystem Hierarchy standard (104)
+<h4> GNU and Unic Commands (103) </h4>
+<ul>
+    <li></li>
+    <li></li>
+</ul>
+
+<h4> Devices, Linux Filesystems, Filesystem Hierarchy standard (104)
+ </h4>
+<ul>
+    <li></li>
+    <li></li>
+</ul>
+
 
 ## System Architecture (101)
 
