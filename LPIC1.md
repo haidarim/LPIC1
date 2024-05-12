@@ -3,6 +3,10 @@
 Linux Professional Institute Certification Level 1:
 
 - System Architecture (101)
+
+* Determine and configure hardware settings 101.1
+* The Boot Process 101.2
+
 - Linux installation and Package Management (102)
 - GNU and Unic Commands (103)
 - Devices, Linux Filesystems, Filesystem Hierarchy standard (104)
@@ -89,9 +93,9 @@ These modules are modules are small pieces of code that can be dynamically loade
 
 - `lsmod`: list all existing modules in the system, and other information related to each module. Note: used by column indicates how many subsystem uses the module right now in the kernel e.g. 0 indicates the specified module is not used by any one.
 
--`rmmod <name of module>`: to remove a module.
+- `rmmod <name of module>`: to remove a module.
 
--`modprobe <name of the module>`: similar to `insmod` is used to insert/add a module into kernel. but `modprobe` is more easy to use, the user only need to type the name of module, but using `insmod` the user should give the path of the module.
+- `modprobe <name of the module>`: similar to `insmod` is used to insert/add a module into kernel. but `modprobe` is more easy to use, the user only need to type the name of module, but using `insmod` the user should give the path of the module.
 
 ex: to add the `iwlwifi` which is the module related to all wifi derivers:
 
@@ -105,7 +109,9 @@ sudo modprobe iwlwifi
 sudo rmmod  -f <nameofmodule>
 ```
 
----
+- NOTE: the changes will be temporary, but for keeping them permanently add their names into `/etc/modules` and also add their config files into the `/etc/modprobe.d/`
+
+### The Boot Process 101.2
 
 #file
 ##stream editor, filterning and transformating:
