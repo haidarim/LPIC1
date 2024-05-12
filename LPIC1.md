@@ -95,8 +95,14 @@ These modules are modules are small pieces of code that can be dynamically loade
 
 ex: to add the `iwlwifi` which is the module related to all wifi derivers:
 
-```zsh
-$ sudo modprobe iwlwifi
+```bash
+sudo modprobe iwlwifi
+```
+
+- NOTE: sometimes we can not remove a module because they being used by some one, to force the remove we can run:
+
+```bash
+sudo rmmod  -f <nameofmodule>
 ```
 
 ---
