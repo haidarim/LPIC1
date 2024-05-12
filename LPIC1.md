@@ -73,7 +73,21 @@ Here is where the kernel keeps its settings and properties. This directory inclu
 
 #### Loadable Kernel Modules:
 
-Linux has almost needed drivers for hardwares so when connecting a new device to the system Linux probably knows how to communicate with the newly connected device, it means that the Linux-kernel most of the time has the needed driver.
+Most of the time, Linux-kernel has needed drivers to communicate with hardwares, so when connecting a new device to the system, the kernel probably knows how to communicate with that device. Rather, the Linux-kernel separate derivers into `.ko` files, known as kernel-modules.
+
+In fact, no drivers are loaded until they are needed. therefore these modules are known as loadable kernel modules as well. When connecting a new device to the system, the kernel will detect the device, search for a suitable device driver, and load the corresponding kernel module (`.ko`) into memory. There is no need of restarting either.
+
+These modules are modules are small pieces of code that can be dynamically loaded and unloaded into the kernel at runtime. After all process, the kernel will register the deivice with the appropriate subsystem, making it accessible to user-space application throught device files in the `/dev`. In this way user-space applications can then read from and write to the device using standard system calls such as `read()` and `write`.
+
+- These modules are located at `/lib/modules`
+
+**Commands related to the kernel-modules:**
+
+- `lsmod`: list all existing modules in the system, and other information related to each module. Note: used by column indicates how many subsystem uses the module right now in the kernel e.g. 0 indicates the specified module is not used by any one.
+
+-`rmmod <name of module>`: to remove a module.
+
+-`modprobe <name of the module>`: similar to `insmod` is used to insert/add a module into kernel. but `modprobe` is more easy to use, the user only need to type the name of module, but using `insmod` the user should give the path of the module.
 
 part 6 3/3 07:05
 
