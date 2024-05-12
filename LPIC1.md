@@ -1,6 +1,4 @@
-# LPIC 1
-
-<h2>Linux Professional Institute Certification Level 1:</h2>
+# LPIC 1: Linux Professional Institute Certification Level 1
 
 <h4> System Architecture (101)</h4>
 <ul>
