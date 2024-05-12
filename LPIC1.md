@@ -126,6 +126,7 @@ sudo rmmod  -f <nameofmodule>
 
 * NOTE: the changes will be temporary, but for keeping them permanently add their names into `/etc/modules` and also add their config files into the `/etc/modprobe.d/`
 
+---
 
 ### The Boot Process 101.2
 When  power being streamed into motherbord then the firmware will starts and check hardwares. After firmware performed sanity check of all hardware (PowerOnSelfTest), it will start the bootloader program. 
@@ -146,6 +147,9 @@ In Linux almost every thing being logged, even when kernel is loading. In fact d
 **Commands relatedd to log:**
 - `dmesg`: will print all info in ring buffer. 
 - `journalctl`: prints journals/logs, e.g. `journal -k` to print kernel logs. 
+
+
+--- 
 
 **More about init systems:**
 1. `systemd`: is a daemon (system daemon), a daemon in Linux is a background process, performing tasks normally without user-interaction. systemd are based on units, an unit is an configuration file describing how systemd manages differetn system resources. These units can be of different types depended on which resource they describe. There are 12 types of units including: 
