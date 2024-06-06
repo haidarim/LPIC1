@@ -180,7 +180,7 @@ These units are typically located in
 
 - ex1: to list only unit of a special type use `systemctl list-units --type=<typeNameSuchAS:service>`
 
-- ex2: To get the status of services by `systemctl status <e.g. service name>`
+- ex2: To get the status of a unit by `systemctl status <unitName>`
 
 - ex3: to get information about a unit: `systemctl cat <name of that unit e.g. grafical.target>`
 
@@ -240,7 +240,60 @@ This command will print out configuration information such as when the target wi
 
 A target can be dependent on another target. For example, target X might need target Y to be in a running state, and target Y, in turn, might need target Z to be running.
 
-009 101.3 07:12
+**Specific targets belonging to the systemd:** systemd has some specific targets for itself to control the machine such as:
+
+- `rescue`: is for rescue, no network, file systems are mounted, and only root user (maintanance mode)
+- `emergency`: only the root file system and in the read-only mode. No networking and only root (maintanance mode)
+- `reboot`
+- `halt`: stops all processes, and halts CPU activities.
+- `poweroff`: like halt but send a ACPI (Advanced Configuration and Power Interface) shutdown signal.
+
+**Target Isolation:** This is a way for switching between targets, When calling isolate using `systemctl isolate <targetName:X>`, to switch to the target X.
+
+**SysV (systemFive) runlevels:** This is an older version provided as an Init system, this system has usually seven different stages in redhat based systems: 0. Shutdown
+
+1. Single user mode (recovery); also called S or s
+2. Multi-user without networking
+3. Multi-user with networking
+4. to be customized by the admin
+5. Multi-user with networking and graphics
+6. reboot
+
+in Debain based systems we had stages 0, 1, 2 and 6.
+
+Even in systemd this levels can be used for examle commands such as:
+
+- `runlevel`: to get the current level which the system is running in, if the system did not changed runlevel it will print `N` and a number representing the current running level. if the system have done swiching between levels then it will print the prevois level and the current running level as a number.
+- `init <num in range 0 to 6>`Ä: to change the run level, i.e. switch the running target.
+- `telinit`: is similar ot init command
+
+**System services scripts:** Are used manage (e.g. starting, stoping, restarting) various of system services (e.g. postgresql, sudo, ssh, ...). this scripts are stored in `/etc/init.d/`.
+
+**Different levels' files:** each run level has its own directory in `/etc/rcX.d` where X is the number of a level. in this directory some files (links) are available that perform each levels tasks, this links are linked actually to files (scripts) existing in the previous explained directory i.e. /etc/initd/
+
+**Safe TearDown:** If we want to stop the system, but we want to save the work before stopping so thhat no data goes lost, we have different commands available for this porpuse:
+
+`shutdown` is a type of halt, power-off or reboot, a better choice for have a safe teardown, then new users dont be accepted to connect the server and connected users can recieve notification about the plan.
+format:
+
+```bash
+shutdown [options...] [TIME] [WALL]
+# args or swithchs
+# when the shutdown must happen
+# what to write for inform all connected/logged in- user before shutting down
+```
+
+ex1: `shutdown now` to shutdown the system imediatly
+ex2: `shutdown -r 10 bye bye` to reboot the system in after counting 10 minutes and sendding the message "bye bye" to all connected users.
+
+ex3: `shutdown -c` to cancle the shutdown process
+
+The file `/etc/motd` (message of the day) is used to write som mesage that will be printed for users when they connects by an terminal e.g. ssh.
+
+## Linux installation and Package Management (102)
+
+### Design Hard Disk Layout, Filesystem Hierarchy Standard (FHS) 102.1
+
 #file
 ##stream editor, filterning and transformating:
 $ sed OPTIONS <SCRIPT> <INPUTFILE>
