@@ -294,6 +294,11 @@ The file `/etc/motd` (message of the day) is used to write som mesage that will 
 
 ### Design Hard Disk Layout, Filesystem Hierarchy Standard (FHS) 102.1
 
+| **bin:**  | Essential command binaries, commands that being used in terminal is placed here. |
+| --------- | -------------------------------------------------------------------------------- |
+| **boot:** | used for booting the system, components such as grub,                            |
+| **dev:**  | all devices                                                                      |
+
 #file
 ##stream editor, filterning and transformating:
 $ sed OPTIONS <SCRIPT> <INPUTFILE>
