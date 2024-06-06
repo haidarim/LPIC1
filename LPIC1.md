@@ -159,7 +159,7 @@ In Linux almost every thing being logged, even when kernel is loading. In fact d
 - Device units, used to manage hardware devices recognized by the kernel
 - Mount units, used to manage mount points for filesystem
 - Timer units, used to schedule actions to be taken at specific times or intervals
-- Target units, used to group units and synchronize the systemstate.
+- Target units, used to group units and synchronize the systemstate. each target is a combination of services.
 - Swap units, used to manage swap space on the system
 - Snapshot units, used to capture the current state of the systemd manager.
 - Slice units, used to manage resources for processes
@@ -221,8 +221,24 @@ These units are typically located in
   6: Informational
   7: Debug
 
-008 101.2 2/2 23:00
+### Runlevels/boot targets and shutdown and reboot system 101.3
 
+Runlevel is different states in the systems lifecycle.
+boot the system ---> kernel ---> load main disk ---> activate other disk ---> root user login ---> multi user ---> network ---> GUI ---> Webserver, dns server ---> shutdown
+
+In Linux systems the current sate can be shanged e.g. to some state before.
+
+**Targets:** As said in previos section. each target is a combination of services, targets can be configuered, arranged, scheduled, etc.
+
+to get information of some target:
+
+```bash
+$ sudo systemctl cat graphical.target
+```
+
+this will print out configuration information such as when the target will be run and which other units will be conflicting with this target, i.e. the target scheduled time lines. There are also information about if the isolation is allowed for the target.
+
+009 101.3 07:12
 #file
 ##stream editor, filterning and transformating:
 $ sed OPTIONS <SCRIPT> <INPUTFILE>
