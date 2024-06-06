@@ -226,17 +226,19 @@ These units are typically located in
 Runlevel is different states in the systems lifecycle.
 boot the system ---> kernel ---> load main disk ---> activate other disk ---> root user login ---> multi user ---> network ---> GUI ---> Webserver, dns server ---> shutdown
 
-In Linux systems the current sate can be shanged e.g. to some state before.
+In Linux systems, the current state can be changed, e.g., to some previous state or different runlevels.
 
-**Targets:** As said in previos section. each target is a combination of services, targets can be configuered, arranged, scheduled, etc.
+**Targets:** As mentioned in the previous section, each target is a combination of services. Targets can be configured, arranged, scheduled, etc.
 
-to get information of some target:
+To get information about a specific target:
 
 ```bash
 $ sudo systemctl cat graphical.target
 ```
 
-this will print out configuration information such as when the target will be run and which other units will be conflicting with this target, i.e. the target scheduled time lines. There are also information about if the isolation is allowed for the target.
+This command will print out configuration information such as when the target will be run and which other units will be conflicting with this target, i.e., the target's scheduled timelines. There is also information about whether isolation is allowed for the target.
+
+A target can be dependent on another target. For example, target X might need target Y to be in a running state, and target Y, in turn, might need target Z to be running.
 
 009 101.3 07:12
 #file
