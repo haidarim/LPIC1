@@ -294,11 +294,72 @@ The file `/etc/motd` (message of the day) is used to write som mesage that will 
 
 ### Design Hard Disk Layout, Filesystem Hierarchy Standard (FHS) 102.1
 
+**FHS:**
+
 | Directories |                                                                                  |
 | ----------- | -------------------------------------------------------------------------------- |
-| **bin:**    | Essential command binaries, commands that being used in terminal is placed here. |
-| **boot:**   | used for booting the system, components such as grub,                            |
-| **dev:**    | all devices                                                                      |
+| **bin**     | Essential command binaries, commands that being used in terminal is placed here. |
+| **boot**    | used for booting the system, components such as grub,                            |
+| **dev**     | all devices                                                                      |
+| **etc**     | the most important, contains the configurations                                  |
+| **home**    | contaons all the user's home directories                                         |
+| **lib**     | shared libraries and kernel modules, shared between programs                     |
+| **media**   | Mount point for removable media, such as USB disk                                |
+| **mnt**     | Mount point for mounting a filesystem temporary                                  |
+| **opt**     | Add-on package installation                                                      |
+| **root**    | home directory for the root-user                                                 |
+| **sbin**    | Essential system binaries such as systemd, grub-installation ,etc                |
+| **srv**     | server directory if there is some server                                         |
+| **tmp**     | where temporary files being stored, seenable for other users                     |
+| **usr**     | secondary hierarchy                                                              |
+| **var**     | variable data e.g. logs, etc                                                     |
+
+**Partitions:**
+| /boot | other partitions |
+
+in other partitions section different partitioning is åossible such as `/` the root partition.
+
+For partitioning the disk the most used command is `fdisk`. disk partiions are under `/dev/` such as `/dev/sda` or `/dev/nvm...` depended on the os.
+
+To see how a partition is mounteed then use `mount` command, this will print out information about partitions, fo example it can show that `/dev/nvme0n1p2 on / `, this means that the partition `/dev/nvme0n1p2` is mounted on `/`.
+
+To see the disk partitioning graphically use `gparted`.
+
+**LVM:** Logical Volume Manager is very helpful when there is a need to resize the partitions or install new disks then adding them to the current mount points.
+
+`pv` or physical volume is the physical partions (drive). The LVM makes it possuble to have diffent sized and divide the pv easier in an `vg` (volume group). So instead of using the whole disk as a unpartitioned, we can have a collection of pvs with user defined sizes in a vg.
+
+There are commands for pv as `$ pv` as well as for lvm as `lvm`
+
+**swap partition:** The linux OS have a partion for swap operation, we can change the size of the swap partiion but it should be carfully becuase having large partition for swap can slow down reading and writing as the hard disk operations are not as fast as memmory operations.
+
+the recommneded size for swap partition is between (RAM size + (2 to 4) GB).
+
+**Some partitioning recommendation:** partitioning is depended on the type of computer:
+
+1. Desktop computer: for PCs is good to have one
+   | /boot (typically 1GB) | swap (RAM size + (2 to 4) GB) | / |
+
+2. Network workstation: i.e. the biggest for `/home` part since network station users may need much space and to prevent rewriting other partiions
+   | /boot (1 GB) | swap (RAM size + (2 to 4) GB) | / (~50GB)| /home (the remainin of size) |
+
+3. Server: the `/var` should be enaugh large since the logs may take much place, and other parts such as `/opt`. When it comes to server partitions should be seperated or using more advanced storage such as RAID. RAID is a data storage virtualization technology that combines multiple physical disk drive components into one or more logical units. There are many types of RAID, one of them for use for backup like fail over scenario, by having two disks that contains same information so if the connected disk fails we dont lose the data and information. RAID can be software or hardware level.
+
+| /boot | / | /var | /opt |
+
+**Other concepts and commands:**
+
+- `free`: To see the status of the memory use the `free` command. For see the information in human readable format use `free -h`
+- `swapon`: To print out information about swap partition
+- `top`: To check the status of the system, CPU, memory, processes, etc.
+
+### Install a boot manager 102.2
+
+This part is important to know for trobleshooting for example when the linux not booting, when the gnu linux not loads.
+
+All boot loaders are or have some parts in the MBR (Master Boot Record). MBR is very small (only 512 bytes) and contains informations about the boot loader. The grub boot loader has bigger size and therefire some parts of it is placed in MBR, which loads the rest of the grub (which resists in other place on the disk).
+
+The boot loader is responsible to find the linux kernel and other related components such as ramfs. The boot loader can also do chain loading as well, it means when we have multi OS then first boot loader for OS gives the control to the boot loader of OS 2.
 
 #file
 ##stream editor, filterning and transformating:
