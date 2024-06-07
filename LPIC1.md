@@ -411,8 +411,8 @@ The installation is same as the grub legacy, i.e. `grub-install /dev/sda`. after
 Remmeber that configurations are located under `etc` så we can change the grub configuration in `/etc/default/grub`, so we can change the configuration in this file and then using the command `grub-mkconfig > /boot/grub/grub.cfg` save changes and rebbot the system.
 
 **sending parameter to the kernel:** we can send parameters to the kernel in grub command line mode.
-| options for sending parameters|
-|-------------------------------|
+| options for sending parameters| |
+|-------------------------------|---|
 | console= | set the console |
 
 #file
