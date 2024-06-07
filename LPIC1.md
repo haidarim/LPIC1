@@ -361,6 +361,60 @@ All boot loaders are or have some parts in the MBR (Master Boot Record). MBR is 
 
 The boot loader is responsible to find the linux kernel and other related components such as ramfs. The boot loader can also do chain loading as well, it means when we have multi OS then first boot loader for OS gives the control to the boot loader of OS 2.
 
+There are different versions of grub, grub1 (or grub version 0.98 also called and called grub legacy) and grub2. The used version is grub2.
+
+**GRUB legacy:**
+This is usually installed in `/boot/grub`. The main configoration of the grub is placed in `/boot/grub/menu.list` (in redhat) or in `/boot/grub/grub.conf`.
+
+`grub.conf` or `menu.list` has two different sections as follows:
+
+1. general:
+
+- color: foreground color and background color for normal and active item.
+- default: which boot menu is the default.
+- fallback: which boot menu shpuöd be replaced for use if the default one fails.
+- hiddenmenu: hide the menu options.
+- splashimage: show this image in the background.
+- timeout: wait the amout if the time and then start the default.
+- password: security set, ask the password (md5)
+- savedefault
+
+2. boot options:
+
+- title: defines the section name e.g. fedora, ubuntu so show a menu item called e.g. fedora
+- root: which partition is adderessed for booting the system.
+- kernel: which kernel on that partition.
+- initrd: which initrd in that partition.
+- rootnoverify: define a non-linux root partition (if the set up is set for chaining)
+- chainloader: got to another chain, another file will act as stage 1 loader, used for booting windows systsems
+
+To install the grub1:
+
+```bash
+grub-install /dev/sda # note not sda1, we install on the whole disk
+
+```
+
+**GRUB2:** Used in linux and the modern version.
+This is installed in `/boot/grub/` or `/boot/grub2`. Under UEFI it is placed in `/boot/efi/EFI/ditroName/`. The configuration file of grub2 is called `grub.cfg`. it is similar to grub legacy:
+
+- menuentry: defines a new menuentry
+- set root: define the rrot where the /boot is located.
+- linux ,linux16: defines the location of the linux kernel on BIOS system.
+- linuxefi: defines the linux kernel on UEFI systems.
+- initrd: defines the initramfs image for BIOS systems.
+- initrdefi: defines the initramfs image for the UEFI systems.
+
+Commands for GRUB2:
+The installation is same as the grub legacy, i.e. `grub-install /dev/sda`. after changing the grub file we need to issue the command: `grub2-mkconfig -o /boot/grub/grub.cfg` or `grub-mkconfig > /boot/grub/grub.cfg`, this command will read the configuration files from `/etc/grub.d/` and `/etc/default/grub` and then creates the `grub.cfg` file based on readed files.
+
+Remmeber that configurations are located under `etc` så we can change the grub configuration in `/etc/default/grub`, so we can change the configuration in this file and then using the command `grub-mkconfig > /boot/grub/grub.cfg` save changes and rebbot the system.
+
+**sending parameter to the kernel:** we can send parameters to the kernel in grub command line mode.
+| options for sending parameters|
+|-------------------------------|
+| console= | set the console |
+
 #file
 ##stream editor, filterning and transformating:
 $ sed OPTIONS <SCRIPT> <INPUTFILE>
