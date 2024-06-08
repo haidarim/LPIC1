@@ -355,7 +355,7 @@ the recommneded size for swap partition is between (RAM size + (2 to 4) GB).
 
 ### Install a boot manager 102.2
 
-This part is important to know for trobleshooting for example when the linux not booting, when the gnu linux not loads.
+This part is important to know for troubleshooting for example when the linux not booting, when the gnu linux not loads.
 
 All boot loaders are or have some parts in the MBR (Master Boot Record). MBR is very small (only 512 bytes) and contains informations about the boot loader. The grub boot loader has bigger size and therefire some parts of it is placed in MBR, which loads the rest of the grub (which resists in other place on the disk).
 
@@ -414,6 +414,17 @@ Remmeber that configurations are located under `etc` så we can change the grub 
 | options for sending parameters| |
 |-------------------------------|---|
 | console= | set the console |
+| debug | start in debug mode|
+| init= | run an specific program instead of the default |
+| initrd= | use the specified initrd |
+| ro | Mount the root read only |
+| rw | Mount the root file systemfor read and write |
+| root= | use the specified path as the root filesystem |
+| selinux| disable selinux on boot |
+| single, S, 1, Single | Boot in single user mode for trouble shooting (SysV) |
+| systemd.unit= | Boot in the specified systemd target |
+
+016 102.3 starta <---------
 
 #file
 ##stream editor, filterning and transformating:
