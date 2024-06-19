@@ -30,3 +30,5 @@ To get all info about the redis server **After connecting to the server:** `> in
 To select a database: `select <nr of db>`
 
 
+
+
