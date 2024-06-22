@@ -6,7 +6,7 @@ Enumeration Phase: This is the primary phase, where a hacker gathers information
 OPTIONS: 
 - `-sV`: To get ports and the service name
 - `-p-`: scan all ports
-- `-sS`: Perform a TCP SYN scan.
+- `-sS`: Perform a TCP SYN scan.  
 - `-O`: Attempt to determine the operating system of the target.
 
 **Firewall:**
