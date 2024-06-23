@@ -298,7 +298,7 @@ The file `/etc/motd` (message of the day) is used to write som mesage that will 
 
 | Directories |                                                                                  |
 | ----------- | -------------------------------------------------------------------------------- |
-| **bin**     | Essential command binaries, commands that being used in terminal is placed here. |
+| **bin**     | system binaries ,command binaries, commands that being used in terminal is placed here. |
 | **boot**    | used for booting the system, components such as grub,                            |
 | **dev**     | all devices                                                                      |
 | **etc**     | the most important, contains the configurations                                  |
@@ -424,7 +424,39 @@ Remmeber that configurations are located under `etc` så we can change the grub 
 | single, S, 1, Single | Boot in single user mode for trouble shooting (SysV) |
 | systemd.unit= | Boot in the specified systemd target |
 
-016 102.3 starta <---------
+
+
+### Manage Shared Libraries 102.3 
+Shared libraries in Linux refer to dynamically linked libraries that programs can use during execution. Instead of each program containing all the code it needs to run (static linking), programs in Linux can depend on external shared libraries, which are separate files containing compiled code that multiple programs can use simultaneously.
+
+
+Managing shared libraries in Linux is necessary to ensure:
+
+- Compatibility: Different versions may exist, each with improvements or fixes. Managing libraries ensures programs use the correct version.
+
+- Dependencies: Programs require specific library versions. Managing libraries resolves these dependencies.
+
+- Security: Libraries can have vulnerabilities needing patches. Managing libraries includes applying security updates.
+
+- Performance: Updating or optimizing libraries can improve program performance.
+
+- Stability: Proper management prevents duplication and maintains system stability during updates or changes.
+
+
+Linux dynimic librares have the `.so` extension and in general look like `libName.so.versionNr` and are located at places like `/lib*/` and `/usr/lib*/`, in Windows OS they are called `DLIs`. 
+- `/lib/`: contains 32-bit libraries (for 32-bit based computer)
+- `/lib64/`: conatins 64-bit libraries (for 64-bit based computer)  
+
+**system libraies and usr libraies:** libraries used by the system are stored/located in `/lib*/` and user/softwares libraries are placed iin `/usr/lib*/`
+
+
+**Commands:**
+- To chech what libraries are needed for a program: `ldd <path of binaries>`, ex: `ldd /usr/bin/ls` if a program is liniked statically then the `ldd` will tell it. 
+
+
+- To all libraries an creatinf a cashe of it use `ldconfig`
+
+- 16 102.3 18:00
 
 #file
 ##stream editor, filterning and transformating:

@@ -23,6 +23,8 @@
 
 - to print only the houndred bottom lines `-xe`
 
+- to find the location of a file: `locate <name>`
+
 #file
 ##stream editor, filterning and transformating:
 $ sed OPTIONS <SCRIPT> <INPUTFILE>
