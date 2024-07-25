@@ -95,7 +95,7 @@ Here is where the kernel keeps its settings and properties. This directory inclu
 
 #### Loadable Kernel Modules:
 
-Most of the time, Linux-kernel has needed drivers to communicate with hardwares, so when connecting a new device to the system, the kernel probably knows how to communicate with that device. Rather, the Linux-kernel separate derivers into `.ko` files, known as kernel-modules.
+Most of the time, Linux-kernel has the needed drivers to communicate with hardwares, so when connecting a new device to the system, the kernel probably knows how to communicate with that device. Rather, the Linux-kernel separate derivers into `.ko` files, known as kernel-modules.
 
 In fact, no drivers are loaded until they are needed. therefore these modules are known as loadable kernel modules as well. When connecting a new device to the system, the kernel will detect the device, search for a suitable device driver, and load the corresponding kernel module (`.ko`) into memory. There is no need of restarting either.
 
@@ -454,7 +454,8 @@ Linux dynimic librares have the `.so` extension and in general look like `libNam
 - To chech what libraries are needed for a program: `ldd <path of binaries>`, ex: `ldd /usr/bin/ls` if a program is liniked statically then the `ldd` will tell it. 
 
 
-- To all libraries an creatinf a cashe of it use `ldconfig`
+- `ldconfig`: will read all configurations and also create a cache of all libraries. 
+- `ldconfig -p`: to print all libraries inside the cache. 
 
 - 16 102.3 18:00
 
