@@ -25,6 +25,12 @@
 
 - to find the location of a file: `locate <name>`
 
+- `file <filename>`: to check what a file is and get inforamtion about a file.
+
+- `readelf`: to check the content of an elf file (linux executable file). 
+ex: `$ readelf -Wl <path of the executable elf file>`
+
+
 #file
 ##stream editor, filterning and transformating:
 $ sed OPTIONS <SCRIPT> <INPUTFILE>

@@ -450,6 +450,32 @@ Linux dynimic librares have the `.so` extension and in general look like `libNam
 **system libraies and usr libraies:** libraries used by the system are stored/located in `/lib*/` and user/softwares libraries are placed iin `/usr/lib*/`
 
 
+**How dynamic libraries being found by OS:**
+The OS will serach files in order to find a shared library that is needed for a program, the steps taken by OS is described as follows: 
+
+1. The OS will check the LD_LIBRARY_PATH which is a environment variable. The OS will check if the required library is there or not. 
+
+2. The OS will look at the PATH, where the program is running.
+
+3. The Os will check the `/etc/ld.so.conf`
+
+4. The OS will look at the `/lib/`, `/lib64/`, `/usr/lib/`, `/usr/lib64/`. 
+
+
+**Using linker to run executable in linux:**
+There is an other approach to run an executable file in linux using linker. 
+The linker in linux is `ld-linux`, which not be executed by calling in whatever directory. to use it we have to enter the complete path for it. The argument given to it is the path of the binary file we want to execute.  
+This approach is used by hackers to run programms which have not execute-permission. 
+ex running ls using ld-linux: 
+
+```sh
+$ /usr/lib64/ld-linux-x86-64.so.2 /usr/bin/ls
+
+```
+
+
+
+
 **Commands:**
 - To chech what libraries are needed for a program: `ldd <path of binaries>`, ex: `ldd /usr/bin/ls` if a program is liniked statically then the `ldd` will tell it. 
 
@@ -457,7 +483,71 @@ Linux dynimic librares have the `.so` extension and in general look like `libNam
 - `ldconfig`: will read all configurations and also create a cache of all libraries. 
 - `ldconfig -p`: to print all libraries inside the cache. 
 
-- 16 102.3 18:00
+
+### Linux Software Repositories (102.4)
+In Linux world a repository (also known as repo) is a storage location from which software packages can be retrived and installed. Repositories can be either official, third-party or personal package archives (PPAs). 
+
+**Components of Repositories:**
+- Package Files: These are the actual software files, e.g. `.deb` for debain based and `.rpm` for REd Hat-based systems. 
+
+- Metadata: information about the packages, such as description, dependencies and version number. 
+
+**Repositories' configuration:**
+Repositories are configured in system files, for example in Debain-based systems repositories' informations are stored in files within `/etc/apt/source.list` and `/etc/apt/source.list.d`
+
+The `/etc/apt/sources.list` file is the primary repository configuration file and can be modified during system updates/upgrades, which might make it harder to manage, especially in collaborative environments. The `/etc/apt/sources.list.d/` directory, however, provides a more modular approach. You can create individual files, such as example.list, in this directory and add repository entries there. The APT package manager will read and use all repository entries from both /etc/apt/sources.list and the files in /etc/apt/sources.list.d/, making it easier to manage repositories separately and collaboratively.
+
+
+ 
+
+**Package File Cache:**
+This cahce-file is used by package managers like APT to store downloaded package files and related metadata. When you install software, the package manager checks this cache first; if the package is already cached, it uses the cached version to install the software, rather than downloading it again from the repository. This improves efficiency by saving download time and bandwidth. In Debain-based systems the cache file is `pkgcache.bin` and is located at `/var/cache/apt/`.
+
+When running `sudo apt update` in Debain-based systems or `sudo dnf update` in Red Hat-based systems, the package manager fetches the latest package lisst from the repositories and updates the local metadata stored in the cache. 
+
+There is also a directory located in `/var/cache/apt/`, called `archives` where you can find many packages that can be installed, this is useful for eaxmple when installing asoftware so package manager may have the software's package already in the archive and dont need to download it.  
+
+
+**Package-management using apt in Debain:**
+- To install package: `$ sudo apt-get install <softwareName>`
+- To simulate the insatllation of a package (i.e. not installing but just simulating whatwould be done by the package manger): `sudo apt-get -s <softwareName>`
+
+- To just download a package without installing it: `sudo apt-get install --download-only <packageName>`
+
+- To download a package without its dependency or other related files: `sudo apt-get  download <packageName>` 
+
+- To remove a package: `sudo apt-get remove <packageName>`
+NOTE: When removing a package, the package manager will only remove the package, not its dependencies. 
+
+- To remove all unneccecary pakcages/dependencies: `sudo apt-get autoremove`
+
+- To remove all dependencies to a specific package: `sudo apt-get autoremove <thatSpecificPackage>`
+
+- To search after a package: `sudo apt search packageName`
+
+- To upgrade packages: `sudo apt upgrade` 
+
+- To force the upgrade use: `apt dist-upgrade`
+
+- To fix borken packages: `sudo apt insatll -f`
+
+
+
+**Package management using dpkg in Debain:** dpkg works with `.deb` files and not repositories. To install a package: `sudo dpkg -i <pathOfTheDebFile>`.
+
+- To list all installed packages in the system: `dpkg -l`
+- To purge/ remove a package and its configuration files: `dpkg -P <name>` or by apt: `apt -P <name>`
+
+- To see all related files to a package: `dpkg -L <name>`
+
+
+
+
+
+### RPM and YUM package management (Redhat based systems) (102.5)
+
+102.5/1 start
+
 
 #file
 ##stream editor, filterning and transformating:
