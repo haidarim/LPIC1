@@ -85,7 +85,7 @@ Here is where the kernel keeps its settings and properties. This directory inclu
 - camera
 - and other connected devices.
 
-**lspsi:** Shows `devices` that are conencted to the computer such as
+**lspci:** Shows `devices` that are conencted to the computer such as
 
 **lsblk:** Shows all `block-devices` which are those that can read from or write to by blocks of data,
 
