@@ -533,7 +533,7 @@ NOTE: When removing a package, the package manager will only remove the package,
 
 
 
-**Package management using dpkg in Debain:** dpkg works with `.deb` files and not repositories. To install a package: `sudo dpkg -i <pathOfTheDebFile>`.
+**Package management using dpkg in Debain:** dpkg works with `.deb` files and not repositories. To install a package: `sudo dpkg -i <pathOfTheDebFile>`. Note: `dpkg` is low level and the `apt`is more higher and abstracted one. 
 
 - To list all installed packages in the system: `dpkg -l`
 - To purge/ remove a package and its configuration files: `dpkg -P <name>` or by apt: `apt -P <name>`
@@ -544,10 +544,12 @@ NOTE: When removing a package, the package manager will only remove the package,
 
 
 
-### RPM and YUM package management (Redhat based systems) (102.5)
+### RPM (RedHat Package Manager) and YUM (YellowDog Update Manager) package management (Redhat based systems) (102.5)
 
-102.5/1 start
+**YUM & Zypper to Manage Software:**
+yum is higher level of packet management 
 
+**RPM:** Is more low level and more near to the machine. Note not in middle like C.  
 
 #file
 ##stream editor, filterning and transformating:
