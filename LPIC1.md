@@ -734,9 +734,13 @@ ex: to print a file in octal format and saying that want to chars as normal char
  or using `od -t -a <fileName>` tells that shows the file and normal character in ascii format like space as `sp`.
 
 
-- head: shows the 10 lines begining in the file. 
+- head: shows the first 10 lines in the begining in the file. 
 
 - tail: prints last 10 lines of a file.  
+
+Note for noth head an tail can the `-n` switch be used to specify the number of lines. 
+
+- <h5> tail using `-f` to watch online new saved changed on a file.</h5>
 
 
 **Selecting parts:**
