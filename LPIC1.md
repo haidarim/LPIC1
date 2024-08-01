@@ -740,7 +740,7 @@ ex: to print a file in octal format and saying that want to chars as normal char
 
 Note for noth head an tail can the `-n` switch be used to specify the number of lines. 
 
-- <h5> tail using `-f` to watch online new saved changed on a file.</h5>
+- <h5> tail can be used with the `-f` switch to watch online new saved changed on a file.</h5>
 
 
 **Selecting parts:**
@@ -755,11 +755,21 @@ split -d -n X <file>
 split -l <numberOflines> <fileName> <out_putname>
 ```
 
-<<<<<025: 05:00>>>>>
+- cut to select and priont cuted part of a file. 
+
 
 **Strings Manipulation:**
+- nl: set nummber for lines.
+- shuf: to shufle content in a file. 
+- sort: to sort content of a file. 
+- 
 
 **Metainfo:**
+
+<<<<<<<<<<<<<<<<<027 3/4, 03:00>>>>>>>>>>>>>>>>>
+
+
+
 
 #file
 ##stream editor, filterning and transformating:
