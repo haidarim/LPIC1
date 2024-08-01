@@ -683,6 +683,18 @@ In modern set up containers used to only use a container engine to run libraries
 ```
 
 
+**IaaS:**
+Back in the days used apporach to host applications, own set up harware, power, ...
+later it becames more using virtual machine and giving the hosting responsibility to other organisations. Nowadays it becames more common to use of cloud and run machines (VMs) using some clould infrastructure provider and then the application owner can use services provided by the cloud provider. Using e.g. infrastructure and managing connection using like AWS or GCP is refered as Infrastructure as a Service (IaaS). 
+
+Note: there are other services that can be provided by cloud providers such as SaaS, PaaS that can even provide pre-configured services. 
+
+
+
+### Shell and Bash essentials 103.1
+
+
+
 
 #file
 ##stream editor, filterning and transformating:
