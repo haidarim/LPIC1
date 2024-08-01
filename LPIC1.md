@@ -640,7 +640,6 @@ Note: hypervisor of type 1 is kvm, svm, Hyper-V from Linux Kernel version 2.6. A
       -------------------------
       |  guest os  | guest os |
       ------------|------------
-            |
             | Hypervisor|
             -------------
             | Host OS   |
@@ -665,6 +664,23 @@ In virtual machine navigate to device -> insert Guest Additional CD image. then 
 
 
 **Containers:**
+In VMs we needed a complete machine as called virtual machines where a complete OS was needed as the guest OS. 
+
+In modern set up containers used to only use a container engine to run libraries and binaries to reduce the need of a OS, in these containers applications can be run and use bins and libs. 
+
+```lua
+        -------------------------
+        | App        | App      |
+        -------------------------
+        |  Bins/Libs | Bins/Libs|
+        -------------------------
+            | container Engine |
+            --------------------
+            |      Host OS     |
+            --------------------
+            |     Hardware     |
+            --------------------
+```
 
 
 
