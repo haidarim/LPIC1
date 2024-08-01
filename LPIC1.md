@@ -546,10 +546,38 @@ NOTE: When removing a package, the package manager will only remove the package,
 
 ### RPM (RedHat Package Manager) and YUM (YellowDog Update Manager) package management (Redhat based systems) (102.5)
 
-**YUM & Zypper to Manage Software:**
-yum is higher level of packet management 
+**YUM (YellowDog Updater Manager)**
+yum is higher level of packet management, used mainly by RedHat based systems. The conf file is located at `/etc/yum.conf` where is all configuration for YUM files. And `/etsc/yum.repos.d` containing repository files. Note: `dnf` is newly nad is working same as yum. 
 
-**RPM:** Is more low level and more near to the machine. Note not in middle like C.  
+Commands:
+- `yum update <packageName>`: update packages to the latest version.
+- `ym install <packageName>`: installs the specified package. 
+- `yum remove <packageName>`: removes the specified package. 
+- `yum list installed`: lists all installed packages. 
+
+
+**DNF (Defined YUM):**
+The next generation of YUM. `dnf` provides better performance and more featurers while maintaining backward compability with YUM commands. The cocnfiguration files are located at: 
+- `/etc/dnf.conf`: AMin conf file for the dnf. 
+- `/etc/dnf.repos.d`: directory for repository configuration files as YUM.
+
+Commands: 
+- `dnf install <packageNAme>`: install the package. 
+- `dnf update`: update all packages. 
+- `dnf remove <packageName>`: remove the specified package. 
+- `dnf list installed`: lists all installed packages. 
+
+
+NOTE: THERE ARE OTHER SWITHCHES ALSO THAT CAN BE USED IN FORM OF HIGH
+OR LOW LEVEL E.G. 
+
+GENERAL FORM: 
+`CMD ACTION -OPTION  
+
+**yumdownloader:** This cmd will downdload `rpm`-files without installing them on the system. Using the command `yumdowwnloader --resolve <packageName>` if the specified pakcage is not available but the RedHat based find some that is the working version on system ask for installation. And by entering `y` to install the package. 
+
+
+**RPM:** Is more low level and more near to the machine. Note not in middle like C, OS ans system calls and assambly.   
 
 #file
 ##stream editor, filterning and transformating:
