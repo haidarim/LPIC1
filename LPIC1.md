@@ -622,6 +622,50 @@ To later do the .cpio file depackage we can use the `cppio -idv < file.cpio` to 
 
 
 
+### Virtualization and Containers 102.6
+Virtual machines, commonly known as VMs, simulate physical machines for the guest operating system (OS). Operations like paging, which involves translating virtual memory addresses to physical memory, can be costly. Critical operations that require kernel-mode access are handled by the hypervisor.
+
+To check CPUs and VMs: `less /proc/cpuinfo`and we can grep based on the arch e.g. `vmx`on INTEL like and `svm` for AMD based CPUs.
+```sh
+less /proc/cpuinfo | grep svm
+```
+
+Note: hypervisor of type 1 is kvm, svm, Hyper-V from Linux Kernel version 2.6. And type 2 is virtual box and VMWare. 
+
+```lua
+      -------------------------
+      | App        | App      |
+      -------------------------
+      |  Bins/Libs | Bins/Libs|
+      -------------------------
+      |  guest os  | guest os |
+      ------------|------------
+            |
+            | Hypervisor|
+            -------------
+            | Host OS   |
+            -------------
+            | Hardware  |
+            -------------
+```
+
+**Creating virtual machine:** Most use approach is using virtual box and booting images and most simple one. 
+
+One other method is cloning i.e. having exact same machine as one we clone from to be able run in other VM (like copy?). Then right click on the machine and chose the clone option. There is also an issue with cloning, When cloning we must not have double of Hostname, NIC IP (if not using DHCP), NIC MAC Address and machine-id. When we clone we clone all information. These stuff should be fixed after cloning, delete `/etc/machine-id` and `/var/lib/dbus/machine-id`after these steps run `dbus--uuidgen --ensure`. Even SSH and PGP and Keys stuff should be fixed! HDD UUIDs and any other UUIDs on the system. Note some config files might be empty on templates, they should also be written and modified if templates are used. 
+
+Machine-id: Each machine has a id and unique id and uuid as universal unique id. 
+
+Another approach to make a cpy of some image or guest OS is to make a Open Virtualization Format `OVF` to move machines between and using the hypervisor.  
+
+Some sofisticated way is to create template, it is a cleaner work and make it easer to have some more configurations. 
+
+**Installing additional drivers for VMs on virtual machiine::**
+In virtual machine navigate to device -> insert Guest Additional CD image. then the desired drive or tool can be installed. 
+
+
+
+**Containers:**
+
 
 
 #file
