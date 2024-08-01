@@ -718,8 +718,10 @@ ex: `PS1='>>\$: '`
 when initializing value or defining paths there should not be spaces because specases are special chars as *, \, ?, ...
 
 
-Path Variable: 
+Path Variable: `echo $PATH`, it can be temporary set using `PATH=$PATH:/path-to-the -binaries`, but to do it permenantly make changes in the .bashrc or .zshrc file.  
 
+
+### Process text streams and filters 103.2
 
 
 
