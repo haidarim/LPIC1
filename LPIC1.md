@@ -617,6 +617,11 @@ Both high level tools like apt or dnf/yum, and low-level tools like dpkg/rpm wou
 
 Using `rpm2cpio <.rpm file>` will just print out the cpio:ed file. but we can use direction to save the cpio:ed file liek: `rpm2cpio <.rpm> > <.cpio>`
 
+To later do the .cpio file depackage we can use the `cppio -idv < file.cpio` to depacke the .cpio file. 
+
+
+
+
 
 
 #file
