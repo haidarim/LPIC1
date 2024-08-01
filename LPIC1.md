@@ -692,6 +692,30 @@ Note: there are other services that can be provided by cloud providers such as S
 
 
 ### Shell and Bash essentials 103.1
+Shell is a user-interface to, it is aUnix term and allows user to communicate with system. Bourne Again shell (bash) is a modern and cmmonly used shell in Gnu/Linux systems
+
+There are different versions of bash. to print out which version of bash is used in the system run `echo "$BASH_VERSION"`. 
+
+Bash files mostly have a starting header line as `#!/bin/bash` indicating. More about bash on (Bash)[http://www.github.com/haidarim/Bash] p4. 
+
+**Environment Vars:**
+It is like what ever variable in programming language, we can initializie them like: 
+```sh
+MYVAR=010
+echo $MYVAR
+```
+ex: 
+```sh
+ARG1=Hello && ARG2=WORLD
+echo $ARG1 $ARG2
+```
+
+Using the `env` command can help to see all iimportant environement variables that are unsderstables by default by the bash. 
+
+
+when initializing value or defining paths there should not be spaces because specases are special chars as *, \, ?, ...
+
+
 
 
 
