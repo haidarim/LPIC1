@@ -723,8 +723,39 @@ Path Variable: `echo $PATH`, it can be temporary set using `PATH=$PATH:/path-to-
 
 ### Process text streams and filters 103.2
 
+Tree Main I/O in Unix: stdin, stdout, stderr. 
+
+**Printing/ Viewing:**
+- cat: to print information of a file. 
+- grep: to find a pattern in a specified input tex. 
+- less: to show information aout a file but havint he options to move e.g. by paging and use commands in a file while reading. 
+- od: showing the content of the file in octal format. 
+ex: to print a file in octal format and saying that want to chars as normal characheters be printed in normal use: `od -t c <fileName>`. 
+ or using `od -t -a <fileName>` tells that shows the file and normal character in ascii format like space as `sp`.
 
 
+- head: shows the 10 lines begining in the file. 
+
+- tail: prints last 10 lines of a file.  
+
+
+**Selecting parts:**
+- split: to split a file into specified number of filed or number of lines in each part:
+1. spliting into X number of files in format of `file00`, ..., `file0X-1`
+```sh 
+split -d -n X <file>
+```
+
+2. spliting a file into different files in format of `out_put_name` + `aa, ab, ac, ...`, ... `za, ab, ...` use: 
+```sh
+split -l <numberOflines> <fileName> <out_putname>
+```
+
+<<<<<025: 05:00>>>>>
+
+**Strings Manipulation:**
+
+**Metainfo:**
 
 #file
 ##stream editor, filterning and transformating:
