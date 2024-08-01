@@ -576,8 +576,44 @@ GENERAL FORM:
 
 **yumdownloader:** This cmd will downdload `rpm`-files without installing them on the system. Using the command `yumdowwnloader --resolve <packageName>` if the specified pakcage is not available but the RedHat based find some that is the working version on system ask for installation. And by entering `y` to install the package. 
 
+**Zypper:** Likly YUM used mostly by SUSE linux and its sibling openSUSE. This package manager uses `ZYpp` as the package manager engin. There other tools like `YAST` or `Zypper` to communicate with the ZYpp.   
+
+Configuration files for ZYpp is located at the `/etc/zypp/zypp.conf` which is the main configuration file for the Zypper. In the `/etc/zypp/repos.d/` are repository configuration files. 
+
+Commands: 
+- `zypper refresh`: refersh the respository metadata. 
+- `zypper install <packageName>`: update the specified package. 
+- `zypper remove <packageName>`: revoes the psecified package. 
+- `zypper update`: updates all packages. 
+- `zypper list-updates`: lists packages with available updates. 
+
+
 
 **RPM:** Is more low level and more near to the machine. Note not in middle like C, OS ans system calls and assambly.   
+general form: 
+
+```sh
+rpm Action [OPTIONS] <packageName>
+```
+
+ex:
+
+```sh
+# Actions like: -i for install (e.g. dpkg -i)
+# Options like: -v for verbase i.e. print all process 
+rpm -iv packageExmaple
+```
+
+
+
+**General note:**:
+Both high level tools like apt or dnf/yum, and low-level tools like dpkg/rpm would have other useful switches. Low level managers can also have `long-tem switches` like --instal instead -i and so on. 
+
+
+
+
+
+
 
 #file
 ##stream editor, filterning and transformating:
