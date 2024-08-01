@@ -710,11 +710,15 @@ ARG1=Hello && ARG2=WORLD
 echo $ARG1 $ARG2
 ```
 
-Using the `env` command can help to see all iimportant environement variables that are unsderstables by default by the bash. 
+Using the `env` command can help to see all important environement variables that are unsderstables by default by the bash. For example the PWD variable is stored already which in turn be used by the `pwd` command to execute. 
+We can also create our own runable binaries like .sh or other programs and run them from any where by the shell by first adding the path into the PATH variable. 
 
+ex: `PS1='>>\$: '`
 
 when initializing value or defining paths there should not be spaces because specases are special chars as *, \, ?, ...
 
+
+Path Variable: 
 
 
 
