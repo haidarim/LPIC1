@@ -669,12 +669,12 @@ In VMs we needed a complete machine as called virtual machines where a complete 
 In modern set up containers used to only use a container engine to run libraries and binaries to reduce the need of a OS, in these containers applications can be run and use bins and libs. 
 
 ```lua
-        -------------------------
-        | App        | App      |
-        -------------------------
-        |  Bins/Libs | Bins/Libs|
-        -------------------------
-            | container Engine |
+        ------------------------------
+        | App         | App          |
+        ------------------------------
+        |Bins/Libs    | Bins/Libs    |
+        ------------------------------
+            | container Engine | # <----
             --------------------
             |      Host OS     |
             --------------------
