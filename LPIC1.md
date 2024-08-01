@@ -604,6 +604,8 @@ ex:
 rpm -iv packageExmaple
 ```
 
+**Using rpm to find misconfigured file:**
+by using the `-V`switch or even better `-Vv` we can see if a programs or packages configuration files are healthy. Healthy files with have only dash but issued files can have S s and some tokens. 
 
 
 **General note:**:
@@ -611,7 +613,9 @@ Both high level tools like apt or dnf/yum, and low-level tools like dpkg/rpm wou
 
 
 
+**rmp2cpio:** cpio files are kind of compressed file. rpm2cpio converts rpm files into cpio file. 
 
+Using `rpm2cpio <.rpm file>` will just print out the cpio:ed file. but we can use direction to save the cpio:ed file liek: `rpm2cpio <.rpm> > <.cpio>`
 
 
 
