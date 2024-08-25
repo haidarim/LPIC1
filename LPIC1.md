@@ -2140,7 +2140,9 @@ To add a new path to PATH variable:
 export PATH=$PATH:/path
 ``` 
 
+**.bashrc file:** This file in Linux is a script that runs every time a new terminal session is started in interactive mode. It is used to configure the user's environment, set up aliases, functions, environment variables and more. This file is stored ini the user's home directory i.e. `~/.bashrc`. 
 
+Using export to set enviaronment variables will save the variable temorary. But when we add a variable in the `.bashrc` file, it will store it permanently. 
 
 **Aliases In Linux:** We can create shortcut or an alternatvive names for a command or a series of commands. Aliases are used to create custom, often shorter, command names for frequently used or complex commands, making it easier to work in the shell. 
 ```sh
@@ -2172,9 +2174,37 @@ $ source tst.sh
 hello world!
 ```
 
+**Functions In Shell:** Like programming languages we can define a function and use them in shell. Shell functions are reusable blocks of code in shell scripting that allow user to group multiple commands under a single name for a specific purpose. 
+
+Defining a function: 
+```sh
+function_name(){
+    <commands>
+}
+```
+
+ex:
+```sh 
+gb=400
+
+getHighTime(){
+	local sum=$((gb+20))
+	echo "the high time is: $sum"
+}
+
+getHighTime
+```
+More about Bash Scripting in [Bash](http://www.github.com/haidarim/Bash).
+ 
 
 
+**Different Shell ENVs (different situations/status shell running):**
 
+1. Login shell: 
+
+2. Interactive shell: 
+
+3. Non interactive shell: 
 
 
 
