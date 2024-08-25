@@ -2194,6 +2194,59 @@ getHighTime(){
 
 getHighTime
 ```
+**Types of variables:**
+1. Local Variables: These variables are defined within scipts or  function blocks, they are limited to the current shell session or script. These variables do not affect the parent shell or other scripts. ex: 
+```sh
+my_var="Hello"
+echo $my_var
+```
+In  a function, we can use the `local` keyword to restrict the variable's scope: 
+```sh
+my_function() {
+    local temp_var="Temporary"
+    echo $temp_var
+}
+```
+2. Environment variables: These variables are typically used to store configuration settings,path, and other data that multiple programs or scripts may need to access. ex: 
+```sh
+export PATH="/usr/local/bin:$PATH"
+export EDITOR="vim"
+```
+
+3. Shell variables: Shell variables are internal variables used by the shell to control its behavior and operations. ex: 
+- `PS1`: Defines the primary prompt string (e.g. the command prompt format).
+- `HOME`: The current user's home directory. 
+- `SHELL`: The path to the current shell binary (e.g. `/bin/bash`).
+
+4. Positional Parameters: These parameters are used to access the argumant passed to a shell script or function. ex: 
+```sh
+
+
+myFunction(){
+	echo "the first param is: $1
+	the second param is: $2"
+}
+
+# entering params in the file
+myFunction "Hello" "World"
+
+myFunction $1 $2
+``` 
+running this bash script using source: 
+```sh
+source tst.sh "första" "andra"
+the first param is: Hello
+	the second param is: World
+the first param is: första
+	the second param is: andra
+```
+
+5. Special Variables: Special variables provide additional information about the shell environment and the status of commands, ex: 
+- `$?`: The exit status of the last command executed. 
+- `$S`: The process ID of the current shell. 
+- `$#`: The number of arguments passed to the script or function. 
+
+
 More about Bash Scripting in [Bash](http://www.github.com/haidarim/Bash).
  
 
