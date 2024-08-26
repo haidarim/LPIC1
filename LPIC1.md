@@ -2251,15 +2251,57 @@ More about Bash Scripting in [Bash](http://www.github.com/haidarim/Bash).
  
 
 
-**Different Shell ENVs (different situations/status shell running):**
+**Different types of shell session:**
 
-1. Login shell: 
+1. Login shell: Is a shell session that is initiated when we log in  to a system (e.g. ssh or a console login). The shell reads files like `/etc/profile`, `~/.bash_profile`, `~/.bash_login` or `~/.profile` in that order. A login shell session sets up the user's environment, including variables, paths, and other settings which will be inherited by all subsequent subshell and terminal sessions. These files typically contain environment setting, path configurations and other startup script. 
 
-2. Interactive shell: 
+2. Interactive shell: This a shell that is started without logging in, typically by opening a terminal emulator in a graphical user interface (GUI). This shell is typically used for day-to-day command execution and scripting in a terminal windows. The shell reads the `~/.bashrc` file. 
 
-3. Non interactive shell: 
+3. Non interactive shell: This shell is started when running a script, command or other non-onoteractive task. The user does not interact with this shell. This shelltypically does not read the `~/.bashrc` file instead other files that have the `#!/bin/bash` header (Shebang line). 
+
+4. Subshell: A child shell session created by the parent shell, usually to execute a command or a group of commands. ex:
+```sh
+(cd /tmp && ls)
+```
+
+When we open a terminal or run a script, the shell spawns a new process. The parent shell process (like opened terminal) can start a new shell (a subshell). The subshell inherits environment variables and the execution environment from the parent. 
 
 
+### Shell Scripting basics (105.2)
+
+**Combining commands:** allows to perform multiple operations in a single line, making your workflows more efficient and flexible. There are several ways to combine commands in the shell, each with different behaviors and use cases.
+
+- Sequential Execution: Using the `;`token we can run multiple commands in sequence, one after the other, regardless whether the previous command was successful or not.
+```sh
+command1; command2; command3
+```
+
+- Conditional Execution (AND): Using the `&&` sign we can chain commands together such that the next command runs only **if the previous command was successful** (i.e. it exited with a status of 0). 
+```sh
+command1 && command2 && command3
+``` 
+
+- Conditional Execution (OR): Using the `||` sign we can run a command **only if the previous command fails** (i.e. it exited with a status different from 0). 
+```sh
+command1 || command2
+```
+
+**Command substitution:** It allows to capture the output of a command and use it as a part of another command or assign it to a variable. 
+- Using backticks: 
+```sh
+result=`command`
+```
+
+- Using `$(...)`: 
+```sh
+result=$(command)
+```
+
+**Conditions:** 
+
+
+**Executign scripts:**
+We can execute scripts using `source`, `sh` or changing the the mode of script using `chmod` and then running script by `./script_name`. 
 
 <<<<<<<<<<<<<<<<<50 /, 12:00>>>>>>>>>>>>>>>>>
 
