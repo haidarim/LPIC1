@@ -2298,10 +2298,30 @@ result=$(command)
 ```
 
 **Conditions:** 
+```sh
+if [condition] 
+then 
+    do some tasks
+else 
+    do other tasks
+fi
+```
+or 
+```sh
+if [condition]; then 
+    do some task
+else
+    do other task
+fi
+```
 
 
 **Executign scripts:**
 We can execute scripts using `source`, `sh` or changing the the mode of script using `chmod` and then running script by `./script_name`. 
+
+
+
+
 
 <<<<<<<<<<<<<<<<<50 /, 12:00>>>>>>>>>>>>>>>>>
 
