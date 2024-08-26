@@ -2241,10 +2241,6 @@ the first param is: första
 	the second param is: andra
 ```
 
-5. Special Variables: Special variables provide additional information about the shell environment and the status of commands, ex: 
-- `$?`: The exit status of the last command executed. 
-- `$S`: The process ID of the current shell. 
-- `$#`: The number of arguments passed to the script or function. 
 
 
 More about Bash Scripting in [Bash](http://www.github.com/haidarim/Bash).
@@ -2302,6 +2298,8 @@ result=$(command)
 if [condition] 
 then 
     do some tasks
+elif
+    do other task
 else 
     do other tasks
 fi
@@ -2310,10 +2308,60 @@ or
 ```sh
 if [condition]; then 
     do some task
+elif
+    do other task
 else
     do other task
 fi
 ```
+
+ex: 
+```sh
+if [ "$1" == "1" ]
+then
+	echo "ett"
+else 
+	echo "two"
+fi
+```
+
+Special Parameters: Special parameters provide additional information about the shell environment and the status of commands, ex:
+- `$?`: The exit status of the last command executed.
+- `$$`: The process ID of the current shell.
+- `$#`: The number of arguments passed to the script or function.
+- `$0`: The name of the script or the shell itsefl. 
+- `$1, $2, ..., $N`: Positional parametes corresponding to the args passed to the script. 
+- `$@`: Expands each args as a separate word, preserving whitespace. 
+- `$*`: Expands all args as a single world with all parameters separated by the first character of the `IFS` (Internal Field Separator). 
+- `$!`: The PID of the last background command. 
+- `$-`: The current options set for the shell. 
+
+
+Comparsion Operators: 
+1. Numeric Comparsions: 
+- `-eq`: equal to, ex: `"$1" -eq 10`, if the first parameter equals to 10. 
+- `-ne`: not equal to.
+- `-lt`: less than. 
+- `-le`: less than or equal to. 
+- `-gt`: Greater than. 
+- `-ge`: Greater than or equal to. 
+
+2. 
+
+
+
+Examples: We can use special characters in condition:
+- `$# -ne`: `$#` number of parameters, `-ne` Not Equal.ex: 
+```sh
+if [ "$#" -ne 2 ]; then
+    # this block runs when the number of args is not exactly 2
+    echo "This script requires exactly 2 arguments."
+    exit 1
+fi
+```
+
+- ``
+
 
 
 **Executign scripts:**
