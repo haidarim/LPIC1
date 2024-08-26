@@ -2346,7 +2346,31 @@ Comparsion Operators:
 - `-gt`: Greater than. 
 - `-ge`: Greater than or equal to. 
 
-2. 
+2. String comparsion: 
+- `=`: equal to. 
+- `!=`: not equal to. 
+- `-z`: true if the string is empty. ex: `if [ -z "$1"]`.
+
+3. File Tests: 
+- `-e`: Checks if a file exists. 
+- `-f`: Checks if a file is a regular file. 
+- `-d`: Checks if a directory exists. 
+- `-r`: Checks if a file is readable. 
+- `-w`: Checks if a file is writable. 
+- `-x`: Checks if a file is executable. 
+- `-p`: To print a message when if statement runs. 
+- `-t`: To set a time, in sec. 
+
+ex: 
+```sh
+filename="example.txt"
+
+if [ -f "$filename" ]; then
+    echo "'$filename' is a regular file."
+else
+    echo "'$filename' is not a regular file or does not exist."
+fi
+```
 
 
 
@@ -2360,9 +2384,88 @@ if [ "$#" -ne 2 ]; then
 fi
 ```
 
-- ``
 
 
+**Reading input from user using read command:** The read command in Bash is used to take input from the user. It reads a line of text from standard input (usually the keyboard) and assigns it to one or more variables. 
+ex.1:
+```sh
+echo 'enter input'
+read input
+echo "your input is: $input" 
+``` 
+ex.2: 
+```sh
+#!/bin/bash
+
+if read -t 5 -p "Enter your name (you have 5 seconds): " name; then
+    echo "Hello, $name!"
+    exit 0
+else
+    echo "You did not enter your name in time."
+    exit 1
+fi
+```
+
+**Loops:** to execute a block of code multiple times. Bash supports several types of loops: `for`, `while`, and `until`
+
+1. `for` loop: 
+- Iterating over a list: 
+```sh
+list=("m1" "m2" "m3")
+
+for e in ${list[@]}; do
+        echo "$e"
+done
+```
+
+```sh
+list=("m1" "m2" "m3")
+
+for e in ${list[*]}; do
+        echo "$e"
+done
+```
+
+```sh
+for fruit in apple orange banana; do
+    echo "$fruit"
+done
+```
+${array[@]}: Expands to each element of the array as a separate word. This means that each element is treated individually, which is crucial when we want to handle elements that contain spaces.
+
+`${array[*]}`: Expands to all elements of the array as a single word, with elements joined by the first character of the IFS (Internal Field Separator), which defaults to a space.
+
+- Iterating over a range of numbers:
+```sh
+for i in {1..5}; do
+    echo "Number: $i"
+done
+```
+
+- Using C-style syntax: 
+```sh
+for ((i=1; i<=5; i++)); do
+    echo "Number: $i"
+done
+# Note we use two ()
+```
+
+
+
+2. `while` loop: To executes a block of code as long as a specified condition is true. 
+```sh
+count=1
+
+while [ $count -le 5 ]; do
+    echo "Count: $count"
+    ((count++))
+done
+```
+
+
+3. `until` loop: 
+
+<<<<<<<break, continue, infinite loop, true, false, list ,stack>>>>>>>>>
 
 **Executign scripts:**
 We can execute scripts using `source`, `sh` or changing the the mode of script using `chmod` and then running script by `./script_name`. 
