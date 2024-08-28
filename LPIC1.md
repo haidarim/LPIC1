@@ -2265,6 +2265,20 @@ When we open a terminal or run a script, the shell spawns a new process. The par
 
 ### Shell Scripting basics (105.2)
 
+**Commentig in Bash Scripting:**
+1. To comment a single line, use the `#`. 
+2. To comment multuple lines use the `:<<'EOF' ..... EOF`, ex: 
+```sh
+list=(e0 Hello e2 e3 e4 e5)
+
+:<<'EOF'
+echo ${#list[1]}
+# Prints 5
+EOF
+
+echo "hej"
+```  
+
 **Combining commands:** allows to perform multiple operations in a single line, making your workflows more efficient and flexible. There are several ways to combine commands in the shell, each with different behaviors and use cases.
 
 - Sequential Execution: Using the `;`token we can run multiple commands in sequence, one after the other, regardless whether the previous command was successful or not.
@@ -2589,7 +2603,7 @@ echo ${list[@]}
 
 - Operations and `()`: The `()` is used for list creation, arthimetic operation, sunshells and command grouping. 
 
- * Arthimetic Operations: In Bash, arithmetic operations are usually done inside `(( ... ))`. The `(( ... ))` syntax is used for integer arithmetic. 
+Ex: Arthimetic Operations: In Bash, arithmetic operations are usually done inside `(( ... ))`. The `(( ... ))` syntax is used for integer arithmetic. 
 ```sh
 #!/bin/bash
 
@@ -2601,20 +2615,193 @@ sum=$((a + b))
 echo "Sum: $sum"  # Outputs: Sum: 30
 ```
 
-- `{}` vs `()` related to array operations and other operations:
+- `{}` related to array operations: Parameter Expansion: Curly braces {} are used for parameter expansion, where you access or manipulate variables.
 
-- `${array[@]}` with and without `" "`: 
+Array Operations: {} is used to access specific elements in an array or to perform operations like slicing.
+Ex: 
+```sh
+#!/bin/bash
 
-**Queue in Bash Scripting:**
+# Array declaration
+array=("apple" "banana" "cherry")
 
-**Stack in Bash Scirpting:**
+# Accessing the second element
+echo "${array[1]}"  # Outputs: banana
+```
+
+- `${array[@]}` with and without `" "`:
+1. Without Quotes ("${array[@]}" vs ${array[@]}): If we use ${array[@]} without quotes, each element of the array is treated as a separate word but only when not within a quoted context. Ex:
+
+```sh
+#!/bin/bash
+
+# Array with spaces in elements
+array=("apple" "banana fruit" "cherry")
+
+# Iterate without quotes
+for item in ${array[@]}; do
+    echo "$item"
+done
+
+# Output: 
+# apple
+# banana
+# fruit
+# cherry
+```
+
+2. With Quotes: When we use "${array[@]}", each array element is treated as a separate argument, even if elements contain spaces. This is generally the safest way to handle arrays, especially when dealing with elements that have spaces. Ex:
+```sh
+#!/bin/bash
+
+# Array with spaces in elements
+array=("apple" "banana fruit" "cherry")
+
+# Iterate with quotes
+for item in "${array[@]}"; do
+    echo "$item"
+done
+
+# Output:
+# apple
+# banana fruit
+# cherry
+```
+
+**Examples of basic DSs in Bash:** 
+a. Queue in Bash Scripting:
+```sh
+#!/bin/bash
+
+# Define a queue (array)
+queue=()
+
+# Enqueue (add to the end)
+queue+=("item1")
+queue+=("item2")
+queue+=("item3")
+
+# Dequeue (remove from the beginning)
+dequeued_item="${queue[0]}"
+queue=("${queue[@]:1}")
+
+echo "Dequeued item: $dequeued_item"
+
+# Print remaining queue items
+echo "Remaining queue: ${queue[@]}"
+```
+
+b. Stack in Bash Scirpting:
+```sh
+#!/bin/bash
+
+# Define a stack (array)
+stack=()
+
+# Push (add to the end)
+stack+=("item1")
+stack+=("item2")
+stack+=("item3")
+
+# Pop (remove from the end)
+popped_item="${stack[-1]}"
+stack=("${stack[@]:0:${#stack[@]}-1}")
+
+echo "Popped item: $popped_item"
+
+# Print remaining stack items
+echo "Remaining stack: ${stack[@]}"
+```
+
 **Sending main to the root user:**
+In many Linux distributions, system administrators often use email to notify the root user (or other users) about important system events or messages. We can use the mail command to send emails to the root user or any other user on the system. To use the mail command, we need to install a mail utility package. The most common ones are mailutils or bsd-mailx. Here’s how to install them:
 
-**Commentig in Bash Scripting:**
+- Debian/Ubuntu:
+```sh
+sudo apt-get update
+sudo apt-get install mailutils
+```
 
+- CentOS/RHEL:
+```sh
+sudo yum install mailx
+```
+
+- Fedora: 
+```sh
+sudo dnf install mailx
+```
+
+* Basic usage of mail command: 
+```sh
+echo "This is the body of the email" | mail -s "Subject of the email" root
+```
+
+* With a File Attachment: 
+```sh
+echo "This is the body of the email" | mail -s "Subject of the email" -A /path/to/attachment root
+```
+
+* Interactive Mode: After running the command below, we’ll enter an interactive mode where we can type our message. End the message by pressing Ctrl+D.
+```sh
+mail -s "Subject of the email" root
+``
+
+* Checking Mail for the Root User: The root user can check received emails using the mail command:
+```sh
+mail
+```
+
+* Configuring Mail Delivery to External Addresses: If we want the root user’s mail to be forwarded to an external email address (e.g., admin@example.com), we can edit the /root/.forward file:
+```sh
+echo "admin@example.com" > /root/.forward
+```
 More about Mailing will be discovered.
 
-<<<<<<<break, continue, infinite loop, true, false, list ,stack>>>>>>>>>
+
+**Returned values:** 
+In Linux, the concept of "returned values" typically refers to the exit status of a command or a script. This is a numerical value that a command returns when it finishes executing. The exit status indicates whether the command was successful or if an error occurred.
+
+Exit status Basics: 
+- `0`: The command executed successfully without any errors. 
+- `Non-zero`: Indicates that the command encountered an error. Different commands may return different non-zero values to indicate various types of errors. 
+
+* Using `$?` to check the status of preciding command execution, ex: 
+```sh
+echo "hej"
+
+echo $? # prints 0 because previous command will be successfully executed
+
+ls non_existent_dir
+echo $? # prints non-zero value, because the directory does not exist
+```
+
+Other example using if statement: 
+```sh
+#!/bin/bash
+
+mkdir /some_directory
+if [ $? -eq 0 ]; then
+    echo "Directory created successfully."
+else
+    echo "Failed to create directory."
+fi
+```
+
+* Using `exit` in scripts to exit the script and return a specific exit statusex: 
+```sh
+#!/bin/bash
+
+if [ "$1" -eq 42 ]; then
+    echo "The answer to life, the universe, and everything."
+    exit 0
+else
+    echo "Wrong answer!"
+    exit 1
+fi
+```
+
+
 
 **Executign scripts:**
 We can execute scripts using `source`, `sh` or changing the the mode of script using `chmod` and then running script by `./script_name`. 
