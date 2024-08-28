@@ -2514,13 +2514,15 @@ done
 
 - Slicing operation, To slice an array and set changing the starting position we can use the `:n` syntax, where n is the index of elment to start slicing (inclusive n, i.e. [n,..]). For example `${array[@]:1}` will skip the first elemtn (at index 0) and includes all sunsequent elemnts. Note, to save the slicing operations we have to store it in the array ex: `array=("${array[@]:1}")`. We can also determine the slicing index in the `:n:m` format. For example `${array[@]:1:2}` will slice from first index until the seconnd index (2), i.e. [1,2]. Examples: 
 
+Keep in mind, when we want do operations with variables and lists, we have to use the `$` character. 
+
 ```sh
 list=("e0" "e1" "e2" "e3" "e4")
 
 list=(${list[@]:1}) # savign changes in the list
 
 for i in ${list[@]}; do
-	echo $i; 
+	echo $i 
 done
 
 # will print e1, e2, e3, e4
@@ -2531,16 +2533,75 @@ list=("e0" "e1" "e2" "e3" "e4")
 
 list=(${list[@]:1:3})
 
-for i in ${list[@]}; do
-	echo $i; 
-done
+echo ${list[@]}
+
 
 # will print e1, e2, e3
 ```
 
-- 
+- Length of an array: To get length of an array we can use the `${#list[@]}` format, using the `#` character. Ex:
+```sh
+list=(e0 e1 e2 e3 e4 e5)
 
-- Operations and `()`: 
+echo ${#list[@]}
+# Prints 6
+```
+
+- Length of an array elements: To get the length of an item in an array we can use the `#` char and the index of the element in the array instead if the `@`. Ex:
+```sh
+list=(e0 Hello e2 e3 e4 e5)
+
+echo ${#list[1]}
+# Prints 5
+```
+
+
+- Adding items to a list/array: To add a new item at the end of a list we use the `+=` operators, e.g. `list+="itemN"`, ex:
+```sh
+list=()
+
+list+=("item1")
+list+=("item2")
+
+echo ${list[@]}
+
+# will print: item1 item2
+``` 
+
+- Removing items from a list/array: To remove an item from the end of  a list we can use the `${list[@]:0:${#list[@]}-1}`, which means slice from begingin exlisive the last element, Note that we have to store changes. To store the last element before removing it we have to use the `${list[-1]}`, which selects the last element, then we can store it.
+ ex:
+```sh
+list=(e0 e1 e2 e3 e4 e5)
+
+# store the last item 
+removed_item=(${list[-1]})
+echo $removed_item
+
+# remove the last item 
+list=(${list[@]:0:${#list[@]}-1})
+
+echo ${list[@]}
+
+# The output: 
+# e5
+# e0 e1 e2 e3 e4
+```
+
+- Operations and `()`: The `()` is used for list creation, arthimetic operation, sunshells and command grouping. 
+
+ * Arthimetic Operations: In Bash, arithmetic operations are usually done inside `(( ... ))`. The `(( ... ))` syntax is used for integer arithmetic. 
+```sh
+#!/bin/bash
+
+# Arithmetic operation
+a=10
+b=20
+sum=$((a + b))
+
+echo "Sum: $sum"  # Outputs: Sum: 30
+```
+
+- `{}` vs `()` related to array operations and other operations:
 
 - `${array[@]}` with and without `" "`: 
 
