@@ -2421,7 +2421,7 @@ done
 ```sh
 list=("m1" "m2" "m3")
 
-for e in ${list[*]}; do
+for e in "${list[*]}"; do
         echo "$e"
 done
 ```
@@ -2462,8 +2462,96 @@ while [ $count -le 5 ]; do
 done
 ```
 
+ex: read input data ubtil a condition is met: 
+```sh
+while true; do
+    read -p "enter -q to quit: " input
+    if [ "$input" == "q" ]; then
+        echo 
+        break
+    fi
+    echo "you entered: $input"
+done
+```
 
-3. `until` loop: 
+3. `until` loop: The until loop is similar to the while loop but with the opposite condition, it runs as long as the condition is false: 
+```sh
+count=1
+until [ $count -gt 5]; do
+    echo "count: $count"
+    ((count++))
+done
+```
+
+Note: We can use the break and continue statements like other programming languages. 
+
+**Data structures in Bash Scripting:** Bash scripting does not have build-in data structures like lists, queues and stacks, but we can emulate these data structures using arrays and basic operations. 
+
+**List in Bash Scipring:**
+```sh
+#!/bin/bash
+
+# Define a list (array)
+list=("item1" "item2" "item3")
+
+# Access an element (first item)
+echo "First item: ${list[0]}"
+
+# Add an element to the list
+list+=("item4")
+
+# Iterate over the list
+for item in "${list[@]}"; do
+    echo "$item"
+done
+```
+
+**Tricks/syntax in bash on arrays:**
+
+-  When we want to use indexing on an array to access elemnts, we have to use the `${array[i]}` format.  
+
+- Refering to all elements of an array we have to use the `${array[@]}` syntax or `${array[*]}`.
+
+- Slicing operation, To slice an array and set changing the starting position we can use the `:n` syntax, where n is the index of elment to start slicing (inclusive n, i.e. [n,..]). For example `${array[@]:1}` will skip the first elemtn (at index 0) and includes all sunsequent elemnts. Note, to save the slicing operations we have to store it in the array ex: `array=("${array[@]:1}")`. We can also determine the slicing index in the `:n:m` format. For example `${array[@]:1:2}` will slice from first index until the seconnd index (2), i.e. [1,2]. Examples: 
+
+```sh
+list=("e0" "e1" "e2" "e3" "e4")
+
+list=(${list[@]:1}) # savign changes in the list
+
+for i in ${list[@]}; do
+	echo $i; 
+done
+
+# will print e1, e2, e3, e4
+```
+
+```sh
+list=("e0" "e1" "e2" "e3" "e4")
+
+list=(${list[@]:1:3})
+
+for i in ${list[@]}; do
+	echo $i; 
+done
+
+# will print e1, e2, e3
+```
+
+- 
+
+- Operations and `()`: 
+
+- `${array[@]}` with and without `" "`: 
+
+**Queue in Bash Scripting:**
+
+**Stack in Bash Scirpting:**
+**Sending main to the root user:**
+
+**Commentig in Bash Scripting:**
+
+More about Mailing will be discovered.
 
 <<<<<<<break, continue, infinite loop, true, false, list ,stack>>>>>>>>>
 
