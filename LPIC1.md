@@ -3015,12 +3015,44 @@ Note: The root user can change any user's password to any password without provi
 ```
 
 
-**Users and Groups:** 
+**Adding New Users:** To add a new user, we can use the `useradd` command. Some useful switches: 
+|Switch| meaning|
+|------|--------|
+|`-d`| home directory|
+|`-m`| create home directory|
+|`-s`| specify shell|
+|`-G`| add to additional groups|
+|`-c`| comment, most of the time, users actual name|
+
+**Modifying Users:** To modify a user’s account details, this command allows to change  a user's attributes such as their username, home directory, shell, group memberships, and more.
+```sh 
+usermod [options] <username>
+``` 
+Commonly used switches: 
+| Switch           | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| `-c <comment>`   | Changes the comment (or GECOS) field of the user account.                   |
+| `-d <dir>`       | Changes the user's home directory to `<dir>`. Use with `-m` to move content. |
+| `-e <date>`      | Sets the expiration date for the user account (format: YYYY-MM-DD).         |
+| `-g <group>`     | Changes the primary group of the user to `<group>`.                         |
+| `-G <group>`     | Adds the user to supplementary groups. Use a comma-separated list.          |
+| `-l <login>`     | Changes the user's login name to `<login>`.                                 |
+| `-L`             | Locks the user account, disabling their password.                           |
+| `-m`             | Moves the content of the user's home directory to the new directory when used with `-d`. |
+| `-p <password>`  | Sets a new encrypted password for the user account.                         |
+| `-s <shell>`     | Changes the user's default login shell to `<shell>`.                        |
+| `-u <uid>`       | Changes the user's UID to `<uid>`.                                          |
+| `-U`             | Unlocks the user account, re-enabling their password.                       |
+| `-aG <group>`    | Adds the user to the specified supplementary group(s) without removing them from other groups. |
+
+
+
+
+### Automate admin tasks and scheduling them (107.2)
 
 
 
 
 
-
-<<<<<<<<<<<<<<<<<50 /, 12:00>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<59 /, 00:00>>>>>>>>>>>>>>>>>
 
