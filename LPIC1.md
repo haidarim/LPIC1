@@ -2820,10 +2820,10 @@ Linux's GUI (Graphical User Interface) stack is a layered architecture that enab
               |                                        |
               |                                        |
               |                                        |                  
-    ---------------------              ----------------------------------
-    |  Desktop Manager  |              |          Window Manager        |   
-    | (GNOME, KDE, ...) |--------------|(OpenBox, i3, dwn, awesome, ...)|
-    ---------------------       |      ----------------------------------
+    ---------------------              ------------------------------------
+    |  Desktop Manager  |              |          Window Manager          |   
+    | (GNOME, KDE, ...) |--------------| (OpenBox, i3, dwn, awesome, ...) |
+    ---------------------       |      ------------------------------------
                                 |
                                 |
                          -----------------
@@ -2836,12 +2836,54 @@ Linux's GUI (Graphical User Interface) stack is a layered architecture that enab
                              ---------
                                 |
                                 |
-                             -----------
-                             | Hardware| # amd64, ARM, PowerPC, ...
-                             -----------
+                       ----------------------
+                       | Hardware (GPU, CPU)| # amd64, ARM, PowerPC, ...
+                       ----------------------
 
 ```
 
+**Component Descriptions:**
+1. User: The person interacting with the system through a graphical interface.
+
+2. Desktop Environment (Desktop Manager):
+- Examples: GNOME, KDE Plasma, XFCE, LXQt.
+
+- Role: Provides a complete graphical environment, including a window manager, panels, file managers, and system settings. It offers a cohesive user experience with consistent design and integrated applications. The desktop environment often includes or relies on a specific window manager.
+
+3. Window Manager:
+- Examples: OpenBox, i3, dwm, awesome, KWin (used in KDE), Mutter (used in GNOME).
+
+- Role: Manages the placement and appearance of windows. It controls how windows are opened, resized, moved, and closed. It also handles keyboard shortcuts, window focus, and decorations (borders, title bars). The window manager communicates with the display server to perform these tasks.
+Correction: The window manager doesn't ask the desktop manager to do things; rather, it directly interacts with the display server to manage windows. In some desktop environments, the window manager is tightly integrated with the desktop manager, but in others (like tiling window managers), it can function independently.
+
+4. Display Server:
+- Examples: Xorg (X11), Wayland.
+
+- Role: Acts as the middleman between the hardware (especially the GPU) and the graphical applications. It handles input (keyboard, mouse), output (displaying graphics on the screen), and manages the rendering of windows. The display server can also support network transparency, allowing applications to be displayed remotely (especially in the case of X11).
+
+- Difference Between X11 and Wayland: 
+X11 (Xorg): An older and more complex system that has been the standard for decades. It requires additional components like compositors and window managers to function efficiently.
+
+Wayland: A newer, more efficient protocol that simplifies the display stack by integrating the compositor and window manager into the display server, offering better performance and security.
+
+5. Kernel:
+
+- Examples: Linux, BSD kernels (like FreeBSD).
+
+- Role: The core part of the operating system that manages hardware resources, including CPU, memory, and I/O devices (like GPUs). It provides a bridge between the hardware and the software running on the system, including the display server.
+
+6. Hardware (GPU, CPU, etc.):
+- Examples: amd64 (Intel/AMD processors), ARM (used in many mobile devices), PowerPC.
+
+- Role: The physical components of the computer, including the graphics processing unit (GPU), central processing unit (CPU), and other hardware peripherals. The kernel interacts directly with this hardware to execute instructions and manage resources.
+
+**Summary:**
+* User: Interacts with the system.
+* Desktop Environment: Provides a complete, cohesive GUI experience.
+* Window Manager: Manages the positioning and behavior of windows.
+* Display Server: Facilitates communication between the hardware and graphical applications.
+* Kernel: Manages hardware resources and system calls.
+* Hardware: Executes instructions and performs computations.
 
 <<<<<<<<<<<<<<<<<50 /, 12:00>>>>>>>>>>>>>>>>>
 
