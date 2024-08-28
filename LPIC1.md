@@ -2807,7 +2807,40 @@ fi
 We can execute scripts using `source`, `sh` or changing the the mode of script using `chmod` and then running script by `./script_name`. 
 
 
+### Linux GUI stack (106.1)
+Linux's GUI (Graphical User Interface) stack is a layered architecture that enables users to interact with the operating system visually, using windows, icons, menus, and other graphical elements. The key components in this stack include display servers (like X11 and Wayland), compositors, window managers, and desktop environments.
 
+```lua        
+                          --------- 
+                          |  User |
+                          ---------
+                              |
+                              |
+              ------------------------------------------  
+              |                                        |
+              |                                        |
+              |                                        |                  
+    ---------------------              ----------------------------------
+    |  Desktop Manager  |              |          Window Manager        |   
+    | (GNOME, KDE, ...) |--------------|(OpenBox, i3, dwn, awesome, ...)|
+    ---------------------       |      ----------------------------------
+                                |
+                                |
+                         -----------------
+                         |Display  Server| # Xorg (X11), WayLand, ... 
+                         -----------------
+                                |
+                                |
+                             ---------
+                             | Kernel|  # Linux, BSD, ...
+                             ---------
+                                |
+                                |
+                             -----------
+                             | Hardware| # amd64, ARM, PowerPC, ...
+                             -----------
+
+```
 
 
 <<<<<<<<<<<<<<<<<50 /, 12:00>>>>>>>>>>>>>>>>>
