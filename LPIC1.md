@@ -3051,7 +3051,7 @@ Commonly used switches:
 ### Automate admin tasks and scheduling them (107.2)
 Automation is a key component of efficient system administration. Linux provides several tools for scheduling tasks, including `cron`, `at`, and `systemd` timer units. Each of these tools has its own use cases and configurations.
 
-1. **Managing Cron Jobs:** This is a time-based job scheduler in Linux Os, it allows to run scripts or commands at special intervals. 
+**1. Managing Cron Jobs:** This is a time-based job scheduler in Linux Os, it allows to run scripts or commands at special intervals. 
 
 Basic concepts: 
 - Cron Jobs: Scheduled tasks that are listed in a `crontab` (cron table) file. 
@@ -3131,7 +3131,7 @@ If we are logged in as root user `sudo`, we can manage crontabs for other users 
 
 
 
-2. **Managing `at` Jobs:** `at` is used for scheduling one-time tasks that run at a specific thime in the future. 
+**2. Managing `at` Jobs:** `at` is used for scheduling one-time tasks that run at a specific thime in the future. 
 
 
 
