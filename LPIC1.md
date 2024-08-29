@@ -3051,7 +3051,7 @@ Commonly used switches:
 ### Automate admin tasks and scheduling them (107.2)
 Automation is a key component of efficient system administration. Linux provides several tools for scheduling tasks, including `cron`, `at`, and `systemd` timer units. Each of these tools has its own use cases and configurations.
 
-**Cron:** This is a time-based job scheduler in Linux Os, it allows to run scripts or commands at special intervals. 
+1. **Managing Cron Jobs:** This is a time-based job scheduler in Linux Os, it allows to run scripts or commands at special intervals. 
 
 Basic concepts: 
 - Cron Jobs: Scheduled tasks that are listed in a `crontab` (cron table) file. 
@@ -3071,6 +3071,28 @@ Basic concepts:
 ``` 
 
 **Using `*` or Names instead of Numbers:**
+- `*` (Asterisk): The asterisk is a wildchard character meaning "any value". When used it in a crontab field, it means that the task should run for every possible value of that filed. For example: `* * * * *` means "every minute of every hour of every day of every moth, regardless of the day of the week". 
+
+- Month Names: We can use the three-letter abbreviations for the month (Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec).
+
+- Day of the Week Names: (Sun, Mon, Tue, Wed, Thu, Fri, Sat).
+
+
+Examples: 
+- Running a Backup scirpt daily at midnight: 
+```sh
+0 0 * * * <path/to/backup.sh>
+```
+
+- Run a Command Every Hour: 
+```sh
+0 * * * * <path/to/script.sh>
+```
+
+- Run a Command Every Minute (Useful for Testing): 
+```sh
+* * * * * <path/to/script.sh>
+```
 
 
 **Manage Crontab Files:** 
@@ -3090,10 +3112,32 @@ crontab -r
 ```
 
 
+**`/var/spool/cron`**: This directory is where the `cron` system stores the individual crobtab files for each user on the system. These files contain the scheduled jobs (cron jobs) that `cron` will execute at specified times. 
+
+Each user who has scheduled cron jobs will have a corresponding file in this directory. The file is named after the username. For example if the user `bob` has scheduled cron jobs, there would be a file named `/var/spool/cron/bob`.
+
+If we are logged in as root user `sudo`, we can manage crontabs for other users using `crontab -u username -e` to edit or `crontab -u username -l` to list their scheduled jobs. 
+
+
+**`/etc/crontab`:** This file is a system-wide crontab file that can contain jobs for multiple users. Unlike user-specific crontabs, it include an additional field specifying the user who should run each job. 
+
+**`/etc/cron.d`:** This directory contains files that can define additional cron jobs, these files have the same syntax as `/etc/crontab` meaning they include the user field. 
+
+**Configuring User Access to Cron:** 
+- `/etc/cron.allow`: If this file exists, only users listed in it can use `cron`.  
+
+- `/etc/cron.deny`: If this file exists, any user listed in it is prohibited from using `cron`. 
+
+
+
+
+2. **Managing `at` Jobs:** `at` is used for scheduling one-time tasks that run at a specific thime in the future. 
 
 
 
 
 
-<<<<<<<<<<<<<<<<<59 /, 00:00>>>>>>>>>>>>>>>>>
+
+
+<<<<<<<<<<<<<<<<<59 /, 00:00--- cron.allow, cron.deny >>>>>>>>>>>>>>>>>
 
