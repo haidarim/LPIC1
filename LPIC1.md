@@ -3132,6 +3132,19 @@ If we are logged in as root user `sudo`, we can manage crontabs for other users 
 
 
 **2. Managing `at` Jobs:** `at` is used for scheduling one-time tasks that run at a specific thime in the future. 
+```sh
+at [OPTION] TIME
+```
+
+- TIME: The time at which the command should run. This can be in various formats, including absolute time, relative time, or even using phrases like "now + 1 hour".
+
+Examples of usage: 
+a. Simple scheduling: To run a command at a specific time, e.g. 2:30 PM: 
+```sh
+echo "Hello, World!" | at 14:30
+```
+
+b. 
 
 
 
