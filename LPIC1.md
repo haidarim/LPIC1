@@ -3049,6 +3049,47 @@ Commonly used switches:
 
 
 ### Automate admin tasks and scheduling them (107.2)
+Automation is a key component of efficient system administration. Linux provides several tools for scheduling tasks, including `cron`, `at`, and `systemd` timer units. Each of these tools has its own use cases and configurations.
+
+**Cron:** This is a time-based job scheduler in Linux Os, it allows to run scripts or commands at special intervals. 
+
+Basic concepts: 
+- Cron Jobs: Scheduled tasks that are listed in a `crontab` (cron table) file. 
+
+- Crontab File: A configuration file where we can define cron jobs. Each user can have their own crontab file, and there's also a system-wide crontab. 
+
+**Crontab File Format:** Each line in a crontab file represents a scheduled job and consists of five-time-and-date fields followed by the command to execute: 
+```plaintext
+* * * * * command_to_execute
+| | | | |
+| | | | +-- Day of the week (0-7, where 0 and 7 are Sunday, Or use Name)
+| | | +---- Month (1-12, Or use Name)
+| | +------ Day of the month (1-31)
+| +-------- Hour (0-23)
++---------- Minute (0-59)
+
+``` 
+
+**Using `*` or Names instead of Numbers:**
+
+
+**Manage Crontab Files:** 
+- List Existing Cron Jobs: 
+```sh
+crontab -l
+```
+
+- Edit Crontab File: The crontab with the `-e` option will open the user's crontab file in the default text editor. We can define our jobs in the opened editor as explained above (Crontab file format).  
+```sh
+crontab -e
+```
+
+- Remove All Cron Jobs: 
+```sh
+crontab -r
+```
+
+
 
 
 
