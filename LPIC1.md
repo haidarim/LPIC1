@@ -3139,12 +3139,27 @@ at [OPTION] TIME
 - TIME: The time at which the command should run. This can be in various formats, including absolute time, relative time, or even using phrases like "now + 1 hour".
 
 Examples of usage: 
-a. Simple scheduling: To run a command at a specific time, e.g. 2:30 PM: 
+- Simple scheduling: To run a command at a specific time, e.g. 2:30 PM: 
 ```sh
 echo "Hello, World!" | at 14:30
 ```
 
-b. 
+- Using Relative Time: We can schedule a command to run relative to the current time. For example: 
+```sh
+echo "echo 'This is one hour later'" | at now + 1 hour
+``` 
+
+- Using Specific Dates: WE can also specify a date for when the command should run: 
+```sh
+echo "echo 'Job runs on 25th December'" | at 10:00 AM Dec 25
+```
+
+-  Using Names instead of time: 
+a. `midnight`: 00:00
+b. `noon`: 12:00
+c. `teatime`: 16:00
+
+
 
 
 
