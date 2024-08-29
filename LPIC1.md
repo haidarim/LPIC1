@@ -3155,9 +3155,9 @@ echo "echo 'Job runs on 25th December'" | at 10:00 AM Dec 25
 ```
 
 -  Using Names instead of time: 
-a. `midnight`: 00:00
-b. `noon`: 12:00
-c. `teatime`: 16:00
+a) `midnight`: 00:00
+b) `noon`: 12:00
+c) `teatime`: 16:00
 
 
 
