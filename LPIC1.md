@@ -3159,6 +3159,159 @@ a) `midnight`: 00:00
 b) `noon`: 12:00
 c) `teatime`: 16:00
 
+Ex: 
+```sh
+echo "echo 'Good morning!'" | at midnight
+```
+
+**Viewing and Managing Scheduled Jobs:**
+- View Scheduled Jobs: To see a list of jobs scheduled by `at`, use: 
+```sh
+atq
+```
+
+- Remove a Scheduled Job: If we want to remove a job before it has been executed, use: 
+```sh
+atrm <job_number>
+```
+
+- Interactive Session: If we enter the `at` command without piping in a command: 
+```sh
+at 15:00
+at> echo "Scheduled task"
+at> <CTRL+D>
+```
+
+Useful options for at command: 
+- `-l` or `atq`: List the pending jobs of the user. 
+- `-d` or `atrm`: Deletes jobs by their job number. 
+- `m`: Sends mail to the user when the job has completed, regardless of whether there was any output. 
+- `-v`: Shows the time the job is scheduled to run before accepting the job. 
+- `-f <file_name>`: Schedules a job using the commands in the specified file. 
+
+
+Similar to cron, we have also `/etc/at.allow` and `/etc/at.deny` for access control. 
+
+
+**3. Systemd Timer Units:** `systemd` timer units provide a more modern alternative to `cron` and `at`, allowing more flexible and complex scheduling. 
+
+Timer Units: Defines when a service should be started. Timer units typically have a `.timer` suffix and are paired with a corresponding service unit with the same name (e.g. backup.timer and backup.service). 
+
+List Systemd Timers: `systemd list-timers`. 
+
+**Creating a Timer Unit:** To create a timer unit, we need two files: 
+- Service Unit File: e.g. backup.service
+```ini
+[Unit]
+Description=Run backup script
+
+[Service]
+ExecStart=/path/to/backup.sh
+```
+
+- Timer Unit File: e.g. backup.timer
+```ini
+[Unit]
+Description=Run backup daily
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+Common Timer Configurations: 
+- `OnCalendar=`: Specifies when the timer should run (e.g. `daily`, `weekly`, `monthly`).
+
+- `OnBootSec=`: Defines a delay after the system boot before the timer starts. 
+- `OnUnitActiveSec=`: Defines the interval after the last activation before the timer runs again. 
+
+**Managing Timer Units:** 
+- Start Timer: 
+```sh
+sudo systemctl start backup.timer
+```
+
+- Enable timer at Boot: 
+```sh
+sudo systemctl status backup.timer
+```
+
+- Check Timer Status: 
+```sh
+systemctl status backup.timer
+```
+
+- List All Active Timers: 
+```sh
+systemctl list-timers
+```
+
+
+**systemd-run Command:** The `systemd-run` command is a tookl that allows to create and start transient systemd services or units on the fly. This is useful when we want to run a command or script as a service temporarily without creating a unit file. 
+
+```sh
+systemd-run [OPTIONS] COMMAND [ARGUMENTS...]
+```
+- COMMAND: The command to run as a service. 
+- OPTIONS: Various options to modify how the command runs. 
+
+
+
+**Common Use Cases for `systemd-run`:** 
+- Running a Command with a Timeout: e.g. to run a command with a maximum runtime of 60 seconds.
+```sh
+systemd-run --property=RuntimeMaxSec=60 <COMMAND>
+``` 
+
+- Running a Command in a Clean Environment: e.g. to run a command in a clean scope, i.e. isolated from the rest of the user's processes. 
+```sh
+systemd-run --user --unit=<COMMAND_UNIT> --scope <COMMAND>
+```
+
+- Scheduling a Command for later Execution: e.g. to run a command tommorow, using `systemd's calendar syntax`. 
+```sh
+systemd-run --on-calendar="tomorrow" <COMMAND>
+```
+
+- Running a Command with a Specific User: e.g. to run  a commadn as a specific user. 
+```sh
+systemd-run --uid=<username> <COMMAND>
+```
+
+- Creating a Transient Service: e.g. to create and run a transient service that runs a command. 
+```sh
+systemd-run --unit=<TEMP_SERVICE> --description="Temporary service" <COMMAND>
+``` 
+
+Options for `systemd-run`: 
+- `--unit=`: Specifies a custom name for the transient unit. 
+- `--description=`: Provides a description for the transient service. 
+- `--on-active=TIME`: Delays the start of the service by the specified amount of time. 
+- `--property=`: Allows setting specific properties for the service, such as `RuntimeMaxSec` to set a timeout. 
+
+- `--user`: Runs the command as a user service instead of a system service. 
+- `--scope`: Creates a scope instead of a service, which is useful for managing resources like CPU and memory. 
+
+ 
+
+
+### Localization and Globalization (107.3)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
