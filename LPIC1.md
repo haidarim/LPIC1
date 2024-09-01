@@ -2017,7 +2017,7 @@ Characteristics:
 
 Creating a hard link: 
 ```sh
-ln <existing_file> <hardlink_file>
+ln <existing_file/src> <hardlink_file>
 ```  
 
 **Soft Links (Symbolic Links or Symlinks):** A soft link (or symbolic link) is a file that acts as a pointer or shortcut to another file or directory. Unlike a hard link, it does not share the same inode as the target file.
@@ -2031,7 +2031,7 @@ Characteristics:
 
 Creating a soft link: 
 ```sh
-ln <path_to_og_file> <soft_link_file>
+ln  -s <path_to_og_file/src> <soft_link_file>
 ```
 
 To unlink a hard or soft link use the unlink command: 
@@ -3309,26 +3309,123 @@ Local Components:
 
 - LC_ALL: Overrides all other LC_* variables and LANG. 
 - LC_CTYPE: Character classification and case conversion. 
-- LC_NUMERIC: 
+- LC_NUMERIC: Number formatting (decimal point, thousands separator). 
+- LC_TIME: Date and time format. 
+- LC_COLLATE: String collection (sorting order). 
+- LC_MONETARY: Currency format. 
+- LC_MESSAGES: Format of system message. 
+- LC_PAPER: Paper size. 
+- LC_NAME, LC_ADDRESS, LC_TELEPHONE, LC_MEASUREMENT and LC_IDENTIFICATION are other specific local settings. 
+
+**Setting Local in Linux:**
+- Checing current locale setting:  
+```sh
+locale 
+```
+
+- Listing available locales: 
+```sh
+locale -a
+```
+
+- Generating a locale: If a desired locale is not available, it may need to be generated, for example to generate `en_US.UTF-8`: 
+```sh
+sudo locale-gen en_US.UTF-8
+sudo update-locale LANG=en_US.UTF-8
+```  
+
+- Setting a locale: We can set a locale by exporting the appropriate variable: 
+```sh
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+```
+
+NOTE: changes shown above can be made permanent by adding them to `~/.bashrc`, `~/.profile`, or `/etc/default/locale`.
+
+- Changing locale system-wide: We can edit the `/etc/default/locale` to set the system-wide locale: 
+ex.
+```sh
+LANG="en_US.UTF-8"
+LC_ALL="en_US.UTF-8"
+```
+
+**Localization:** 
+- `/etc/default/locale`: This file defines the system-wide locale setting. 
+- `/etc/locale.gen`: Lists locales that are available for use on the system. Commenting out a locale in this file will disable it. 
 
 
+**Configuring Timezones Setting:** Time zone configuration ensures that the system's clock reflects the correct local time, which is crucial for logs, scheduled tasks and and general time-based operations. 
+
+- Check Current Timezone: 
+```sh
+timedatectl
+```
+
+- Listing available timezones: 
+```sh
+timedatectl list-timezones
+```
+
+- Setting Timezone: 
+```sh
+sudo timedatectl set-timezone <e.g. Europe/London>
+```
+
+- NTP (Network Time Protocol) Synchronization: To keep the system clock in sync with the network time servers: 
+```sh
+sudo timedatectl set-ntp true
+# This enables automatic sync with NTP servers. 
+```
+
+**System Time vs Hardware Clock:** 
+- System time: The current time according to the OS. 
+- Hardware Clock: The time kept by the hardware clock on the motherboard. 
+
+We can synchronize the hardware clock with the system time using: 
+```sh
+sudo hwclock --systohc
+```
 
 
+**Environment Variables for Timezone and Localization:**
+- `TZ`: Sets the timezone for a particular session. For example: 
+```sh
+export TZ=Europe/London
+# This sets the timezone for the current session.
+```
+
+- `LANG` and `LC_*` Variables: As mentioned earlier, these are crucial for localization, ensuring that all system messages, date formats, etc, align with the user's preferences. 
 
 
+**date Command:** This command in Linux is used to display and set the system date and time. It can also be used to format and output the date and time in various ways, making it veralite tool for both users and scripts. 
+
+- Display the Current Date and Time: 
+```sh
+date
+```
+
+**Formatting the Date Output:** We can use various format specifiers with the date command to display the date and time in a custom format. Format specifiers are prefixed with `%`: 
+- `%Y`: Year (e.g. 2024)
+- `%m`: Month (01-12)
+- `%d`: Day of the month (01-31)
+- `%H`: Hour (00-23)
+- `%M`: Minute (00-59)
+- `%S`: Second
+- `%A`: Full weeekday name (e.g. Tuesday)
+- `%B`: Full month name (e.g. Augusti)
+- `%T`: Time in HH:MM format.
+
+Example: To display the date in `YYYY-MM-DD` format: 
+```sh
+date +"%Y-%m-%d"
+# example output: 2024-08-27
+``` 
+
+**Configuring timezone with tzselect command::** To select a new time zone we can use `tzselect` command and it will print informatiosn and promt to get data. 
 
 
+**Default timezone:** The default timezone comes from the `/etc/localetime`. This file have a short link pointig to a timeone file in the `/usr/share/zoneinfo/`. 
 
 
-
-
-
-
-
-
-
-
-
-
-<<<<<<<<<<<<<<<<<59 /, 00:00--- cron.allow, cron.deny >>>>>>>>>>>>>>>>>
+sssssssssssssssss60 >>>>>>>>>>>>>>>>>
 
