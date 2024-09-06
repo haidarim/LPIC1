@@ -3524,7 +3524,7 @@ chronyc sourcestats
 
 
 ### System Logging (108.2)
-
+In linux woord we have a centralized logging system, called `syslog` past in the days, or the later one `rsyslog` which was used by most distros. `rsyslog` is still present and is part of the GNU/Linux universe. 
 
 
 
