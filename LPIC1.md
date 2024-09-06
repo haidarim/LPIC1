@@ -3433,7 +3433,7 @@ iconv -f <format> -t <format> <file>
 To list all formats supported by the iconv command use `iconv -l`. 
 
 
-### Maintain System Time, Hardware and timezones
+### Maintain System Time, Hardware and timezones (108.1)
 The hardware clock usually rely on a CMOS battery (complementary metal.oxide-semiconductor battery) to kepp track of the system's real-time closk (RTC) and maintain settings like time and date even when the computer is turned off. 
 
 In some cases when the battery dies, the computer loses the time and dates stored in the RTC, when the system is on again it may promt the user to enter the current time and date. In other cases if the battery has died or is missing, the system may default to preset date and time stored in its firmware (Often Jan 1,1970). 
@@ -3470,9 +3470,66 @@ To start the NTP daemon and synch the system time in the background:
 sudo ntpd
 ``` 
 
+`mtpdate` is a simpler and one-time utility to synchronize the system clock immediately by querying a specified NTP server. 
+```sh
+sudo ntpdate pool.ntp.org
+```
+
+NOTE: The `ntpdate` is deprecated and it is replaced by `ntpd -q` for same purpose. 
+
+
+NTP Query Utility: The `ntpq` command is a utility used to monitor and query the status of the NTP daemon (`ntpd`). It provides detailed information about the current state of time synchronixation on a system running the NTP daemon. We can use the `ntpq` to:
+- check the status of our NTP server or client. 
+- view the list of NTP serevrs (peers) that our system is synchronized with. 
+- get performance statistics and check for issues in time synchronization. 
+```sh
+ntpq -p # Display a list of peers (NTP servers) with synchronization status.
+
+# other common options: 
+# -c rv: Display system variables and synchronization details.
+
+# -c peers: Display detailed peer information.
+# -c as: Display association IDs for the NTP peers.
+```
+
+`chrony`: It is the modern alternative to `ntpd`. It is designed to perform better on laptops or computers that are not always connected to the internet. 
+
+Main `chrony` Components:
+1. `chronyd` (the daemon): is the main service/daemon responsible for synchronizing the system clock with remote NTP servers. It runs in background and constantly monitors the time, adjusting for drift and network conditions. 
+
+2. `chronyc` (the command line tool):  is a command-line utility used to interact with chronyd, allowing to monitor its status and manage its configuration in real-time.
+
+The configuration for the chrony is places at `/etc/chrony/chrony.conf`. 
+
+Common use of chrony: 
+- Check Synchronization Status: 
+```sh
+chronyc tracking 
+```
+
+- Check Server Status:
+```sh
+chronyc sources
+```
+
+- Manually forcce a Time sych: 
+```sh
+chronyc makestep
+```
+
+- Check drift or frequency: 
+```sh
+chronyc sourcestats
+```
+
+
+### System Logging (108.2)
 
 
 
 
-sssssssssssssssss60 10:16 >>>>>>>>>>>>>>>>>
+
+
+
+<<<63>>>
 
