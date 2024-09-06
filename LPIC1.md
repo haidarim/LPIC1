@@ -3424,8 +3424,18 @@ date +"%Y-%m-%d"
 **Configuring timezone with tzselect command::** To select a new time zone we can use `tzselect` command and it will print informatiosn and promt to get data. 
 
 
-**Default timezone:** The default timezone comes from the `/etc/localetime`. This file have a short link pointig to a timeone file in the `/usr/share/zoneinfo/`. 
+**Default timezone:** The default timezone comes from the `/etc/localetime`. This file have a short link pointig to a timeone file in the `/usr/share/zoneinfo/`. We can use the `ln` command to link to some other timezone file.  
+
+**Convertign coding to each other:** to convert encoding format from some format to another use the `iconv` command, the `-f` (from) switch indicated that the next arg after this switch is the current format of the file to be converted and the `-t` (to) will say that the next arg is the format to convet the file in: 
+```sh
+iconv -f <format> -t <format> <file>
+``` 
+To list all formats supported by the iconv command use `iconv -l`. 
 
 
-sssssssssssssssss60 >>>>>>>>>>>>>>>>>
+
+
+
+
+sssssssssssssssss60 10:16 >>>>>>>>>>>>>>>>>
 
