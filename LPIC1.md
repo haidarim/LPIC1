@@ -3433,6 +3433,43 @@ iconv -f <format> -t <format> <file>
 To list all formats supported by the iconv command use `iconv -l`. 
 
 
+### Maintain System Time, Hardware and timezones
+The hardware clock usually rely on a CMOS battery (complementary metal.oxide-semiconductor battery) to kepp track of the system's real-time closk (RTC) and maintain settings like time and date even when the computer is turned off. 
+
+In some cases when the battery dies, the computer loses the time and dates stored in the RTC, when the system is on again it may promt the user to enter the current time and date. In other cases if the battery has died or is missing, the system may default to preset date and time stored in its firmware (Often Jan 1,1970). 
+
+To check the hardware's clock i.e. date and time issue the `hwclock` with the sudo previlige.
+
+The Hardware's time is set based on UTC (Universal Time Clock). When computer boots up the OS will fix the time by adding the user right timezone to the hardware time. 
+
+To set the hardware clock manually: 
+```sh
+hwclock --localtime --set --date="yyyy-mm-dd hh-mm-ss"
+# --localtime: tells the system that the hardware clock is set to the local time, rather than the UTC. 
+
+# --set: This tells hwclock that we want to set the time on the hardware clock manually. 
+
+# --date="...": date and time to set the hwclock to.
+```
+
+To synchronize the hardware clock with the system clock:
+```sh
+hwclock -u -w
+# set based on UTC 
+# -w: tells that use the current time on the system
+```
+
+
+**Network Time Protocol (NTP) and related tools:**
+NTP is a prorocol used to synchronize the tome on computers and networks devies to ensure that the clocks accross systems are consistent. 
+
+The implementation of NTP is called `ntpd` (NTP Daemon). This is a background service that runs on system to constantly adjust and synchronize the system time. The configuration file for `ntpd` is placed in `/etc/ntp.conf` and it is configurable, this file specifies NTP servers, time drift fiiles and other parameters. 
+
+To start the NTP daemon and synch the system time in the background: 
+```sh
+sudo ntpd
+``` 
+
 
 
 
