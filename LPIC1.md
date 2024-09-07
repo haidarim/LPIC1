@@ -3524,8 +3524,33 @@ chronyc sourcestats
 
 
 ### System Logging (108.2)
-In linux woord we have a centralized logging system, called `syslog` past in the days, or the later one `rsyslog` which was used by most distros. `rsyslog` is still present and is part of the GNU/Linux universe. 
+In linux world we have a centralized logging system, called `syslog` past in the days, later it becames `syslog-ng`. `rsyslog` exists also  which is used by most distros. `rsyslog` is still present and is part of the GNU/Linux universe. 
 
+Who ever wants to log in the system writes in `/dev/log` and when reading logs the system loads logs from that device. 
+
+The `Kernel Ring Buffer` has is kernel's own memory to keep logs during booting. To print the kernel's logs issue the `dmesg` command.
+
+**Common log files:** In general logs are stored in `/var/log`. If there is any issue we can check this file to see if any program has generated a new log to this file, ex by isusing the `ls -ltrh /var/log`.
+
+Other important log files: 
+- `/var/log/auth.log`: Contains logs about authenticaition, i.e. cron jobs, fialed logins, sudo information, etc.
+
+- `/var/log/syslog`: A centralized place where most of the logs recived by the `rsyslogd`, if a specific log file is not provided in `/etc/rsyslog.conf`. 
+
+- `/var/log/debug`: Debug information from programs. 
+
+- `/var/log/kern.log`: Contains kernel messages. 
+
+- `/var/log/messages`: Messages from services. Also the default place for logs for remote clients. 
+
+- `/var/run/utmp` and `/var/log/wtmp`: Successful logins. 
+
+- `/var/log/btmp`: Failed logins. 
+- `/var/log/faillog`: Failed authentication attempts. 
+
+- `/var/log/lastlog`: Contains date and time of recent user logins. 
+
+**Service Logs:** Service logs create file sor directoies at the `/var/log` and update their logs there. For instance `/var/log/mysql`. 
 
 
 
