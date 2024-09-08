@@ -2307,6 +2307,46 @@ result=`command`
 result=$(command)
 ```
 
+**Case statement:** 
+```sh
+case <variable> in
+  <pattern1>)
+    # Commands for pattern1
+    ;;
+  <pattern2>)
+    # Commands for pattern2
+    ;;
+  <pattern3>|<pattern4>)
+    # Commands for pattern3 or pattern4
+    ;;
+  *)
+    # Default commands if no other patterns match
+    ;;
+esac
+```
+
+Ex: 
+```sh
+#!/bin/bash
+
+read -p "Enter a number (1-3): " number
+
+case $number in
+  1)
+    echo "You entered one."
+    ;;
+  2)
+    echo "You entered two."
+    ;;
+  3)
+    echo "You entered three."
+    ;;
+  *)
+    echo "Invalid number!"
+    ;;
+esac
+```
+
 **Conditions:** 
 ```sh
 if [condition] 
@@ -3543,18 +3583,27 @@ Other important log files:
 
 - `/var/log/messages`: Messages from services. Also the default place for logs for remote clients. 
 
-- `/var/run/utmp` and `/var/log/wtmp`: Successful logins. 
+- `/var/run/utmp` and `/var/log/wtmp`: Successful logins. Binary format. 
 
 - `/var/log/btmp`: Failed logins. 
-- `/var/log/faillog`: Failed authentication attempts. 
+- `/var/log/faillog`: Failed authentication attempts. The format of this file is binary. 
 
-- `/var/log/lastlog`: Contains date and time of recent user logins. 
+- `/var/log/lastlog`: Contains date and time of recent user logins. The format of this file is binary, and not text. 
+
+NOTE: in Debian based machines the logs are `var/log/syslog` and in Redhat based it is `var/log/messages`. But we can configure them also to determone where should logs be stored. 
 
 **Service Logs:** Service logs create file sor directoies at the `/var/log` and update their logs there. For instance `/var/log/mysql`. 
 
+Commands related to logs: 
+- `last`: shows all successful logins logs. 
+- `lastb`: shows all failed logins. 
 
 
 
 
-<<<63>>>
+
+
+
+
+<<<63 17:00>>>
 
