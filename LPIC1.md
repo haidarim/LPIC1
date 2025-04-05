@@ -3889,6 +3889,57 @@ NOTE: in Debian based machines the logs are `var/log/syslog` and in Redhat based
 
 **Service Logs:** Service logs create file sor directoies at the `/var/log` and update their logs there. For instance `/var/log/mysql`.
 
+`/etc/logrotate.conf` constain configurations for logging and how they should be prepared, e.g. if logs should be compressed,
+
+```conf
+# uses date as extension to the log files
+dateext
+
+# enables compressing
+compress
+
+# ... other confs ...
+
+# wtmp and btmp are all successful logs to be saved in spec dir:
+/var/log/wtmp {
+    monthly
+    # creates utmp with 6 = 110 rw- for the root user and 110 = read and write goup utmp  and 100 = rwx  read only others
+    create 0664 root utmp
+        minimize 1M # give the size (that the minimum size should be 1 Meg)
+    rotate 1 # giving that
+}
+
+```
+
+**LOG management:**
+NOTE: for more info you can always use the `man` and in this case: `man logrotate`
+
+NOTE: `/etc/logrotate.d/` is where applications have the conf files for the logs, for instance:
+the httpd file which is for the
+
+```sh
+/var/log/http/*log {
+  missingok #
+  notifyempty
+  sharedscripts
+  delaycompress
+  postrotate
+    /bin/systemctl reload http.service > /dev/null 2> /dev/null || true
+  endscript
+}
+```
+
+Definations:
+
+- `/var/log/http/*log`: says what ever file with the given pattern,
+- if missing then ok,
+- if the file is emty dont do any action,
+- share the script
+- delaycompress: will say that compress but before this preocess,compress only only based on the set date, for instace weekly, daily. This will be run only if the compress is enabled in the log configuration.
+
+**NOTE:**
+There may exist other conf file for linux ditros, under `/etc/cron.*`.
+
 Commands related to logs:
 
 - `last`: shows all successful logins logs.
@@ -3897,4 +3948,14 @@ Commands related to logs:
 **Log and handling (log rotation):**
 In case of problems such as log size increasing and being unmaintainable, so we have to configure the way system approaches logs.
 
-<<<63 17:00>>>
+**Short about log system design and levels:**
+**1. Traditional Stack (OS-Level Management):** Tools like `rsyslog`.
+`rsyslog` will manage log stuff on OS on GNU/linux machines.
+
+<!--TODO: WRITE THE LOGGING IN VM VS CONTAINER -->
+
+<<<64 1:00>>>
+
+```
+
+```
