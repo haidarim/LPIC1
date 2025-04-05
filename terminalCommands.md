@@ -63,6 +63,16 @@ ex: To print first and last columns.
 ls -la | awk '{print $1, $NF}'
 ``` 
 
+To print a compressed file without opening it: 
+- `zcat`
+- `zless`
+
+
+
+
+
+
+
 
 
 htb;File Descriptors and Redirections
